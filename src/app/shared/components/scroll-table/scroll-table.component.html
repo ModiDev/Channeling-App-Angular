@@ -1,0 +1,90 @@
+<div class="table-wrapper container table-responsive" [ngClass]="isHistoryPage ? 'history-page' : 'normal-page'">
+    <table class="table mb-0">
+        <tr>
+            <th style="padding-left: 24px;" (click)="sortBookings('REF-NO')">Ref. No. <fa-icon
+                    *ngIf="currentSort === 'REF-NO'" [icon]="sortIconUp" class="fa-xs"
+                    style="margin-left: 5px;font-weight: bold;"></fa-icon>
+                <fa-icon *ngIf="currentSort !== 'REF-NO'" [icon]="sortIcon" class="fa-xs"
+                    style="margin-left: 5px;font-weight: bold;"></fa-icon>
+            </th>
+            <th (click)="sortBookings('NAME')">Name <fa-icon *ngIf="currentSort === 'NAME'" [icon]="sortIconUp"
+                    class="fa-xs" style="margin-left: 5px;font-weight: bold;">
+                </fa-icon>
+                <fa-icon *ngIf="currentSort !== 'NAME'" [icon]="sortIcon" class="fa-xs"
+                    style="margin-left: 5px;font-weight: bold;">
+                </fa-icon>
+            </th>
+            <th style="cursor:default;">Contact No</th>
+            <th style="cursor:default;">Type</th>
+            <th (click)="sortBookings('PATIENT-NO')">Patient No. <fa-icon *ngIf="currentSort === 'PATIENT-NO'"
+                    [icon]="sortIconUp" class="fa-xs" style="margin-left: 5px;font-weight: bold;">
+                </fa-icon>
+                <fa-icon *ngIf="currentSort !== 'PATIENT-NO'" [icon]="sortIcon" class="fa-xs"
+                    style="margin-left: 5px;font-weight: bold;">
+                </fa-icon>
+            </th>
+            <th (click)="sortBookings('PATIENT-NO')"> Status <fa-icon *ngIf="currentSort === 'PATIENT-NO'"
+                    [icon]="sortIconUp" class="fa-xs" style="margin-left: 5px;font-weight: bold;">
+                </fa-icon>
+                <fa-icon *ngIf="currentSort !== 'PATIENT-NO'" [icon]="sortIcon" class="fa-xs"
+                    style="margin-left: 5px;font-weight: bold;">
+                </fa-icon>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
+        <tbody>
+            <tr
+                *ngFor="let data of bookings | bookingStatus:statusFilter:searchString | bookingsSort:sortBy:currentSortPipe">
+                <td scope="row">{{data.referenceNo}}</td>
+                <td>{{data.patientName}}</td>
+                <td>{{data.patient?.mobile}}</td>
+                <td [ngClass]="data.bookingStatus == 'CONFIRMED' ? 'Confirmed'
+            : data.bookingStatus ==='TENTATIVE' ? 'Tentative'
+            : data.bookingStatus === 'CANCELLED'? 'Cancelled': 'some-class__normal'">{{data.bookingStatus}}</td>
+                <td>{{data.patientNo}}</td>
+                <td>
+                    <div ngbDropdown display="dynamic">
+                        <h6 class="confirmation-type" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button">
+                            <fa-icon [icon]="faCircle" class="fa-xs" *ngIf="data.patientConfirmation !== '' "
+                                style="color: #e2e2e2;"
+                                [ngClass]="{ 'green-status'  : data.patientConfirmation === 'ANSWERED' || data.patientConfirmation === 'ARRIVED', 
+                                'yellow-status' : data.patientConfirmation === 'NOT-ANSWERED' || data.patientConfirmation === 'NOT-WORKING',
+                            'gray-status' : data.patientConfirmation === 'ON-THE-WAY' || data.patientConfirmation === 'NOT-SURE',
+                        'red-status' : data.patientConfirmation === 'WRONG-NUMBER' || data.patientConfirmation === 'CANCELLED'}">
+                            </fa-icon>
+                            {{ data.patientConfirmation }}
+                        </h6>
+                        <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="">
+                            <div class=" d-flex" ngbDropdownItem *ngFor="let type of getPatientConfirmationTypesList()"
+                                (click)="updatePatientConfirmationType(type, data)">
+                                {{ type }}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <fa-icon *ngIf="data.bookingStatus === 'TENTATIVE'" (click)="cancelBooking(data)"
+                        class=" btn icon-size btn-fonts" [icon]="faBan" style="color: #7a7a7a"></fa-icon>
+                </td>
+                <td>
+                    <fa-icon *ngIf="data.bookingStatus !== 'CANCELLED'" class=" btn icon-size btn-fonts"
+                        (click)="editBooking(data)" [icon]="faEdit" style="color: #7a7a7a"></fa-icon>
+                </td>
+                <td>
+                    <button *ngIf="data.bookingStatus === 'TENTATIVE'" (click)="openAppointmentView(data)"
+                        class="btn btn-reusable-table btn-fonts" style="width: 75px">CONFIRM
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,60 @@
+.side-bar-container {
+  background-color: var(--div-background-color);
+  overflow: scroll;
+  height: 100%;
+  border-radius: var(--div-border-radius);
+  ngb-accordion ::ng-deep .card {
+    border-radius: 0;
+    border: none;
+  }
+  ngb-accordion ::ng-deep .card-header {
+    border-bottom: 1px solid #eaeaea;
+    background-color: white;
+    fa-icon {
+      color: var(--text-color-gray);
+    }
+    .toggle-arrow {
+      cursor: pointer;
+    }
+  }
+
+  ngb-accordion ::ng-deep .card-header button {
+    width: 95%;
+    padding: 8px 1.125rem 8px 10px;
+    text-decoration: none;
+    text-align: left;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--text-color-gray);
+  }
+  ngb-accordion ::ng-deep .card-header button:focus {
+    box-shadow: none;
+  }
+
+  .selected-header fa-icon {
+    color: var(--text-color-purple-mixed);
+  }
+
+  .side-bar-doctor-card {
+    background: var(--button-gradient-purple);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: var(--div-border-radius);
+    .doctor-name {
+      font-size: 16px;
+      font-family: "Roboto";
+      font-weight: 400;
+      color: var(--text-color-white);
+    }
+    .doctor-contact {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-color-white);
+    }
+  }
+  .side-bar-doctor-card:hover {
+    background: var(--button-gradient-purple-hover);
+    cursor: pointer;
+  }
+}

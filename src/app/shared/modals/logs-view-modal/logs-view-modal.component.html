@@ -1,0 +1,46 @@
+<div class="logs-wrapper">
+  <div class="row g-0">
+    <div class="col title">
+      <h5> {{ modalTitle }} </h5>
+    </div>
+    <div class="col-4">
+      <app-search-bar placeholderText="Find"></app-search-bar>
+    </div>
+    <div class="col-1 close-button">
+      <button class="btn ms-auto d-flex py-1" (click)="activeModal.dismiss('Cross click')">
+        <fa-icon [icon]="faTimes" class="m-0 sm" style="color: #f1f1f1 "></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row mt-2 g-0">
+    <div class="col details">
+      <h6 class="details-title"> Consultant </h6>
+      <h4 class="details-data"> {{ "" + session.doctor?.title + " " + session.doctor?.name }} </h4>
+    </div>
+    <div class="col details">
+      <h6 class="details-title"> Date </h6>
+      <h4 class="details-data"> {{ session.sessionDate | date: 'dd/MM/yyyy' }} </h4>
+    </div>
+    <div class="col details">
+      <h6 class="details-title"> Active Time </h6>
+      <h4 class="details-data time"> {{ session.startsAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',
+        hour12:
+        true }) + " - " + session.endsAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })
+        }}
+      </h4>
+    </div>
+  </div>
+  <table class="mytable mt-2">
+    <tr>
+      <th style="padding-left: 24px;">Date & Time </th>
+      <th>Activity </th>
+      <th>User</th>
+    </tr>
+    <tr *ngFor="let log of logs">
+      <td style="padding-left: 24px;">{{log.createdAt| date: 'dd/MM/yyyy h.mm a'}}</td>
+      <td>{{log.name}}</td>
+      <td>{{ getUserName(log.createdBy) }}</td>
+    </tr>
+  </table>
+
+</div>

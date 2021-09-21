@@ -1,0 +1,289 @@
+<div class="add-booking-container">
+    <app-loading></app-loading>
+    <div class="model-title">
+        <div class="titles"><label class="main-title">{{ modalTitle }}</label><label class="sub-title">{{ isFirstPage ?
+                " Patient Details" : "Charges" }}</label></div>
+        <button type="button" class="btn btn-close" (click)="activeModal.dismiss('Cross click')">
+            <fa-icon [icon]="faCross" class=" d-flex mb-auto mt-auto " style="color: #f1f1f1 ">
+            </fa-icon>
+        </button>
+    </div>
+    <!-- <div class="row g-0">
+        <div class="col title">
+            <h5> <span> {{ modalTitle }} </span>&nbsp; {{ isFirstPage ? " Patient Details" : "Charges" }}</h5>
+        </div>
+        <div class="col-2 close-button">
+            <button class="btn ms-auto d-flex py-1" (click)="activeModal.dismiss('Cross click')">
+                <fa-icon [icon]="faCross" class="m-0 sm" style="color: #f1f1f1 "></fa-icon>
+            </button>
+        </div> 
+    </div> -->
+    <div class="py-2">
+        <div *ngIf="error.length" class="add-booking-error">
+            {{ error }}
+        </div>
+    </div>
+    <div *ngIf="isFirstPage" class="form-container">
+        <form [formGroup]="bookingForm">
+            <fieldset>
+                <div class="form-group mt-2">
+                    <label for="ab-name" class="form-label">Name<span>*</span> </label>
+                    <input type="text" class="form-control" id="ab-name" required formControlName="name"
+                        [ngClass]="{'form-input-error' : bookingForm.get('name')?.invalid && (bookingForm.get('name')?.dirty || bookingForm.get('name')?.touched)}">
+                    <div *ngIf="bookingForm.get('name')?.invalid && (bookingForm.get('name')?.dirty || bookingForm.get('name')?.touched)"
+                        class="form-error-message mt-1">
+                        <div *ngIf="bookingForm.get('name')?.errors?.required">
+                            <p> Name field can't be empty </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group mt-2 g-0">
+                    <div class="col-6">
+                        <label for="ab-age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="ab-age" formControlName="age" min="1" max="120">
+                    </div>
+                    <div class="col ms-4">
+                        <p for="ab-sex" class="form-label-custom mb-0">Sex</p>
+                        <div class="d-flex g-0 justify-content-between">
+                            <button type="button" class="d-flex btn px-4 pb-auto pt-1" (click)="selectGender(false)"
+                                [ngClass]="{ 'primary-toggle-button' : !isFemale , 'primary-toggle-button-disabled' : isFemale}">
+                                Male
+                            </button>
+                            <button type="button" class="d-flex btn px-3 pt-1" (click)="selectGender(true)"
+                                [ngClass]="{ 'primary-toggle-button' : isFemale, 'primary-toggle-button-disabled' : !isFemale }">
+                                Female
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="ab-contactNo" class="form-label">Contact Number<span>*</span></label>
+                    <input type="text" class="form-control" id="ab-contactNo" required formControlName="contactNo"
+                        [ngClass]="{'form-input-error' : bookingForm.get('contactNo')?.invalid && (bookingForm.get('contactNo')?.dirty || bookingForm.get('contactNo')?.touched)}">
+                    <div *ngIf="bookingForm.get('contactNo')?.invalid && (bookingForm.get('contactNo')?.dirty || bookingForm.get('contactNo')?.touched)"
+                        class="form-error-message mt-1">
+                        <div *ngIf="bookingForm.get('contactNo')?.errors?.required">
+                            <p> Contact Number field can't be empty </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-2" *ngIf="!isEdit">
+                    <fieldset>
+                        <label for="ab-patientNo" class="form-label">Patient Number</label>
+                        <select *ngIf="!isPatientNoLoading" id="ab-patientNo"
+                            class="form-select form-control custom-select" formControlName="patientNo">
+                            <option *ngFor="let num of getReservedNumbers()" [ngValue]="num"> {{ num.toString() + " - "
+                                + " Reserved Number" }}</option>
+                            <option *ngFor="let num of getAvailableNumbers()" [ngValue]="num"> {{ num.toString() + " - "
+                                + " Cancelled Number" }}</option>
+                            <option *ngIf="patientNo > 0" [ngValue]="patientNo" selected> {{ patientNo}} </option>
+                        </select>
+                    </fieldset>
+                    <input *ngIf="isPatientNoLoading" class="form-control" [disabled]="isPatientNoLoading"
+                        placeholder="Patient number is still loading...">
+
+                </div>
+                <div class="form-group mt-2" *ngIf="isEdit">
+                    <label for="ab-patientNo" class="form-label">Patient Number</label>
+                    <input disabled class="form-control" [value]="booking.patientNo">
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="ab-nicNo" class="form-label">NIC / Passport Number</label>
+                    <input type="text" class="form-control" id="ab-nicNo" formControlName="nicNo">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="ab-address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="ab-address" formControlName="address">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="ab-address" class="form-label">Status</label>
+                    <div class="d-flex g-0 justify-content-start">
+                        <button type="button" class="d-flex btn px-4 pt-1" [disabled]="isConfirmEdit"
+                            (click)="selectBookingStatus(true)"
+                            [ngClass]="{'primary-toggle-button' : isTentative, 'primary-toggle-button-disabled' : !isTentative}">
+                            Tentative
+                        </button>
+                        <button type="button" class="d-flex btn px-3 ms-3 pt-1" [disabled]="isConfirmEdit"
+                            (click)="selectBookingStatus(false)"
+                            [ngClass]="{'primary-toggle-button' : !isTentative, 'primary-toggle-button-disabled' : isTentative }">
+                            Confirmed
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group button-container mt-4">
+                    <button type="button" [disabled]="!bookingForm.valid" (click)="onTentativeConfirm()"
+                        class="btn btn-block lift text-white primary-form-button col-12">{{ isTentative ?
+                        submitButtonTitle
+                        :
+                        "NEXT" }}
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div *ngIf="!isFirstPage" class="form-container">
+        <form [formGroup]="bookingFormConfirmed">
+            <fieldset>
+                <div class="form-group mt-2">
+                    <label for="ab-payment-method" class="form-label">Payment Method</label>
+                    <select id="ab-payment-method" class="form-select form-control custom-select"
+                        formControlName="paymentMethod">
+                        <option value="CASH" selected> Cash</option>
+                        <option value="CARD"> Card</option>
+                    </select>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label for="ab-services" class="form-label">Services</label>
+                    <div class="row gx-0 mb-4" id="ab-services">
+                        <button *ngFor="let service of session.services; let i = index" type="button"
+                            class="service-btn mt-2 btn px-4 pb-auto pt-1 me-2" style="max-width: initial;width: auto;"
+                            (click)="selectService(service)"
+                            [ngClass]="{'primary-toggle-button' : checkServiceIsSelected(service) , 'primary-toggle-button-disabled' : !checkServiceIsSelected(service)}">
+                            {{ service.service.toUpperCase() }}
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <div class="row g-0 mt-1" *ngFor="let service of selectedServices; let i = index;"
+                        style="margin-bottom: 20px;">
+                        <div class="col g-0 fee-row pe-1 me-2">
+                            <div>
+                                <div style="display: flex;align-items: center;">
+                                    <div style="width: 120px;" class="text-truncate">{{ service.service | titlecase }}
+                                    </div>
+                                    <div>Doctor</div>
+                                </div>
+                                Fee(Rs)
+                            </div>
+                            <p class="fee-row-value">
+                                {{ service.doctorFee }}
+                            </p>
+                        </div>
+                        <div class="col fee-row pe-1 me-2">
+                            <div>
+                                <div style="display: flex;align-items: center;">
+                                    <div style="width: 120px;" class="text-truncate">{{service.service | titlecase }}
+                                    </div>
+                                    <div>Hospital</div>
+                                </div>
+                                Fee(Rs)
+                            </div>
+                            <p class="fee-row-value">
+                                {{ service.hospitalFee }}
+                            </p>
+                        </div>
+                        <div class="col fee-row pe-1"
+                            *ngIf="bookingFormConfirmed.get('paymentMethod')?.value === 'CASH' ">
+                            <p>
+                                Cash Disc. <br /> Fee(Rs)
+                            </p>
+                            <p class="fee-row-value">
+                                {{ service.cashDiscountFee }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3 mb-2">
+                    <div class="row g-0">
+                        <h6 class="col-4 form-label pe-0 me-0"> Additional Payments</h6>
+                        <div class="col-2 switch">
+                            <input id="switch-additional" type="checkbox" class="switch-input"
+                                [checked]="isAdditionalPayment">
+                            <label for="switch-additional" class="switch-label"
+                                (click)="isAdditionalSwitch()">Switch</label>
+                        </div>
+                        <label class="col-4 ms-auto form-label"> Discount</label>
+                        <div class="col-2 switch ms-4">
+                            <input id="switch-discount" type="checkbox" class="switch-input" [checked]="isDiscount">
+                            <label for="switch-discount" class="switch-label"
+                                (click)="isDiscountSwitch()">Switch</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 mb-2" *ngIf="isAdditionalPayment">
+                    <div class="row g-0 mt-1" *ngFor="let service of additionalFees; let i = index;"
+                        style="margin-bottom: 20px;justify-content: space-between;">
+                        <div class="col g-0 fee-row-input pe-1" style="width: 120px;flex-grow: 0;">
+                            <div>
+                                <div style="display: flex;align-items: center;">
+                                    <div style="width: 57px;padding-right: 4px;">Additional</div>
+                                    <div style="width: 100px;" class="text-truncate">{{ service.service | titlecase }}
+                                    </div>
+                                </div>
+                                Doctor Fee(Rs)
+                            </div>
+                            <!-- <p>
+                                {{ "Additional " + session.services[i].service | titlecase }} Doctor Fee
+                            </p> -->
+                            <div class="">
+                                <input type="number" class="form-control" [(ngModel)]="additionalFees[i].doctorFee"
+                                    [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="col fee-row-input pe-1" style="width: 120px;flex-grow: 0;">
+                            <!-- <p>
+                                {{ "Additional " + session.services[i].service | titlecase }} Hospital Fee
+                            </p> -->
+                            <div>
+                                <div style="display: flex;align-items: center;">
+                                    <div style="width: 57px;padding-right: 4px;">Additional</div>
+                                    <div style="width: 100px;" class="text-truncate">{{service.service | titlecase }}
+                                    </div>
+                                </div>
+                                Hospital Fee(Rs)
+                            </div>
+                            <div class="">
+                                <input type="number" class="form-control" [(ngModel)]="additionalFees[i].hospitalFee"
+                                    [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="col fee-row-input pe-1" style="min-width: 120px;flex-grow: 0;"
+                            *ngIf="bookingFormConfirmed.get('paymentMethod')?.value === 'CASH' ">
+                            <p>
+                                Additional Cash Disc. Fee(Rs)
+                            </p>
+                            <div class="">
+                                <input type="number" class="form-control"
+                                    [(ngModel)]="additionalFees[i].cashDiscountFee"
+                                    [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-2 mb-2" *ngIf="isDiscount">
+                    <label for="ab-discount-type" class="form-label">Discount Type </label>
+                    <select id="ab-discount-type" class="form-select form-control custom-select"
+                        formControlName="discountType">
+                        <option *ngFor="let discount of discounts" [ngValue]="discount.nameLowerCase">{{discount.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group mt-2 mb-2"
+                    *ngIf="bookingFormConfirmed.get('discountType')?.value === 'employee discount'">
+                    <label for="ab-employee-name" class="form-label">Employee Name </label>
+                    <ng-template #rt let-r="result" let-t="term">
+                        <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+                    </ng-template>
+                    <input type="text" class="form-control" id="ab-employee-name" formControlName="employeeName"
+                        [resultTemplate]="rt" placeholder="Employee Name" [(ngModel)]="employeePipeModel"
+                        [ngbTypeahead]="search" [inputFormatter]="formatter" [editable]='false'>
+                </div>
+                <div class="row mb-2">
+                    <div class="col form-group button-container mt-4 ">
+                        <button type="button" (click)="goBack()"
+                            class="btn btn-block lift primary-form-button-nobg col-12"> BACK
+                        </button>
+                    </div>
+                    <div class="col form-group button-container mt-4">
+                        <button type="submit" [disabled]="!bookingFormConfirmed.valid" (click)="onConfirm()"
+                            class="btn btn-block lift text-white primary-form-button col-12">
+                            {{ submitButtonTitle }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

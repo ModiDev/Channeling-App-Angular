@@ -1,0 +1,27 @@
+.admin-side-bar-wrapper{
+    background-color: var(--div-background-color);
+    height: 100%;
+    cursor: pointer;
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            padding: 15px 30px;
+            border-bottom: 1px solid #eaeaea;
+            color: #7a7a7a;
+            &:hover{
+                color: #7C6FF9;
+            }
+            span{
+                margin-right: 23px;
+                font-size: 14px;
+                display: inline-block;
+                width: 23px;
+            }
+        }
+        .active{
+            color: #7C6FF9;
+        }
+    }
+}

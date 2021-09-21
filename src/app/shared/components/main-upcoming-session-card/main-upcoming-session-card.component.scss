@@ -1,0 +1,31 @@
+.main-upcoming-session-card{
+    width: 230px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 3px rgba(122, 122, 122, 0.25);
+    border-radius: 4px;
+    padding: 13px 18px;
+    .card-row{
+        display: flex;
+        justify-content: space-between;
+        color: #7A7A7A;
+        .text-01{
+            font-weight: bold;
+            font-size: 24px; 
+        }
+        .text-02{
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .text-03{
+            font-weight: 500;
+            font-size: 16px;
+        }
+        button{
+            height: 100%;
+        }
+    }
+}
+
+::ng-deep .add-booking-button{
+    height: 100% !important;
+}

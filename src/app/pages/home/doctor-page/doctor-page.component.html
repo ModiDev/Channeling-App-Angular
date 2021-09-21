@@ -1,0 +1,77 @@
+<div class="col content pe-3">
+    <div class="row">
+        <div class="col first-row mb-2 ps-3 pe-2">
+            <div class="row mb-2 g-0">
+                <div class="col px-0">
+                    <div class="section-title" *ngIf="doctor">
+                        <div class="title me-2">
+                            <h6> {{ (doctor?.title ?? "") + " " + ( doctor?.name ?? "") }} <span> | </span> </h6>
+                        </div>
+                        <div class="contact me-2">
+                            <h6> {{ doctor?.specialty?.toUpperCase() ?? "" }} <span> | </span></h6>
+                        </div>
+                        <div class="contact">
+                            <h6> {{ doctor?.contact ?? "" }}</h6>
+                        </div>
+                        <button class="btn btn-reusable pt-0 ms-auto me-2 open-btn " (click)="openAddSession()">ADD
+                            SESSION</button>
+                        <button class="scroll-button btn me-2 px-4" (click)="list.scroll(-1)"
+                            [disabled]="!isSessionsListOverflowed">
+                            <fa-icon [icon]="faAngleLeft" class="mt-0 mb-0 btn-icon fa-lg"></fa-icon>
+                        </button>
+                        <button class="scroll-button btn px-4 me-1" (click)="list.scroll(1)"
+                            [disabled]="!isSessionsListOverflowed">
+                            <fa-icon [icon]="faAngleRight" class="mt-0 mb-0 btn-icon fa-lg"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-1 active-sessions-row overflow-auto list me-1" appScrollable #list="appScrollable"
+                [scrollUnit]="300" #activeSessions>
+                <div class="col me-3" *ngFor="let session of getUpcomingSessions()">
+                    <app-session-card-doctor [session]="session" (onSelectedEvent)="setGloballySelectedSession($event)"
+                        [isGloballySelected]="session.id === globallySelectedSessionId">
+                    </app-session-card-doctor>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="third-row  pe-2">
+            <div class="row g-0 mb-3">
+                <div class="col px-0">
+                    <div class="section-title">
+                        <div class="title mx-3">
+                            <button class="btn-end-session" [disabled]="!selectedSession" (click)="endSession()">END
+                                SESSION</button>
+                        </div>
+                        <div class="col">
+                            <fa-icon class=" btn" [icon]=" faEdit" style="color: #7a7a7a" (click)="openEditSession()">
+                            </fa-icon>
+                        </div>
+                        <div class="ms-auto me-3 py-1" style="width: 71px;height: 30px;">
+                            <app-add-booking-button [session]="selectedSession"> </app-add-booking-button>
+                        </div>
+                        <div class="" style="padding-right: 10px">
+                            <select class="form-control form-control-sm form-select-sm ms-auto drop-down-input"
+                                style="width: 165px" [(ngModel)]="statusFilter">
+                                <option value="">All</option>
+                                <option value="CONFIRMED" selected> Confirmed</option>
+                                <option value="TENTATIVE"> Tentative</option>
+                                <option value="CANCELLED"> Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="ms-auto">
+                            <app-search-bar placeholderText="Search by Name or Phone"
+                                (onChangedEvent)="searchText = $event"></app-search-bar>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid g-0 px-3 upcoming-session-list ">
+                <app-scroll-table [session]="selectedSession" [searchText]="searchText" [statusFilter]="statusFilter">
+                </app-scroll-table>
+            </div>
+        </div>
+    </div>
+</div>

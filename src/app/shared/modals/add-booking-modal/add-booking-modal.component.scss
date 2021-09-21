@@ -1,0 +1,177 @@
+.model-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 11px;
+    .titles{
+      .main-title{
+          font-size: 18px;
+          font-weight: 700;
+          color: #7A7A7A;
+          margin: 0;
+          padding-top: 3px;
+        }
+        .sub-title{
+          font-size: 14px;
+          font-weight: 300;
+          color: #7A7A7A;
+          margin: 0;
+          padding-top: 3px;
+          margin-left: 9px;
+        }
+    }
+   
+  }
+
+.add-booking-container {
+    padding: 21px 35px;
+    .title {
+        h5 {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-color-gray);
+        }
+        span {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-color-gray);
+        }
+    }
+    .close-button {
+        button {
+            background: var(--button-gradient-pink);
+        }
+    }
+
+    .form-label {
+        font-size: 12px;
+        font-weight: 300;
+        color: var(--text-color-gray);
+        margin-bottom: 0;
+        padding-top: 0;
+        span {
+            margin-left: 0px;
+            color: var(--error-message-text-color-red);
+        }
+    }
+    .form-label-custom {
+        margin-top: 5px;
+        font-size: 12px;
+        font-weight: 300;
+        color: var(--text-color-gray);
+    }
+
+    .form-select {
+        height: 32px;
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--text-color-black);
+
+        border: 1px solid #eaeaea;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    .form-select:focus {
+        outline: none !important;
+        border-color: lightskyblue;
+        box-shadow: #ffffff;
+    }
+
+    input {
+        height: 30px;
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--text-color-black);
+    }
+
+    .primary-toggle-button {
+        height: 30px;
+        font-size: 14px;
+        font-weight: 300;
+        color: white;
+        background: var(--button-gradient-purple);
+        box-shadow: var(--button-drop-shadow);
+    }
+
+    .primary-toggle-button-disabled {
+        height: 30px;
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--text-color-black);
+        background-color: white;
+        box-shadow: var(--button-drop-shadow);
+    }
+    .service-btn {
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    .primary-form-button {
+        font-size: 13px;
+        font-family: "Roboto-medium";
+        font-weight: 700;
+        background: var(--button-gradient-green);
+        box-shadow: var(--button-drop-shadow-light);
+    }
+    .primary-form-button-nobg {
+        font-size: 13px;
+        font-family: "Roboto-medium";
+        font-weight: 700;
+        color: var(--text-color-gray);
+        border: var(--button-border-dark);
+        box-shadow: var(--button-drop-shadow-light);
+    }
+    .form-error-message {
+        p {
+            font-family: "Roboto-light";
+            font-size: 12px;
+            color: var(--error-message-text-color-red);
+        }
+    }
+    .form-input-error {
+        border-color: var(--error-message-text-color-red);
+    }
+
+    .add-booking-error {
+        font-family: "Roboto-light";
+        text-align: center;
+        font-size: 14px;
+        color: var(--error-message-text-color-red);
+    }
+
+    .fee-row {
+        div,p {
+            font-family: "Roboto";
+            font-size: 12px;
+            font-weight: 300;
+            text-align: left;
+            color: var(--text-color-light-gray);
+            margin-bottom: 0 !important;
+            width:90%;
+        }
+        .fee-row-value {
+            font-family: "Roboto";
+            font-size: 14px;
+            font-weight: 400;
+            text-align: left;
+            color: var(--text-color-gray);
+        }
+    }
+    .fee-row-input {
+        div,p {
+            font-family: "Roboto";
+            font-size: 12px;
+            font-weight: 300;
+            text-align: left;
+            color: var(--text-color-light-gray);
+            margin-bottom: 0 !important;
+            width:100%;
+        }
+    }
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}

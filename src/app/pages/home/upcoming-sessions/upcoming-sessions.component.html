@@ -1,0 +1,12 @@
+<app-action-bar title="Upcoming" (onSearchTextChange)="onChangeSearchText($event)" (onSearchTypeChange)="onChangeSearchType($event)"
+  (onAction)="onActionClick()" placeholder="Search by doctor name or specialty"></app-action-bar>
+<div class="container-fluid panel p-0">
+  <div >
+    <div *ngFor="let group of sessionGroups | USGFilter:searchText" style="border-bottom: 1px solid #ECECEC;padding: 20px;">
+      <div style="color: #7A7A7A;"><span style="font-weight: bold;">{{group.doctorName}}</span> | {{group.doctorSpec | uppercase}} | {{group.doctorContact}} </div>
+      <div style="display: flex; overflow-x: auto;"><div *ngFor="let session of group.sessions" style="margin: 10px;">
+        <app-main-upcoming-session-card [session]="session"></app-main-upcoming-session-card>
+      </div></div>
+    </div>
+  </div>
+</div>

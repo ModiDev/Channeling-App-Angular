@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read;
+      allow write: if false;
+    }
+    match /bookingTemplates/{bookingTemplateId} {
+      allow read;
+      allow write: if false;
+    }
+    match /bookings/{bookingId} {
+      allow read;
+      allow write: if false;
+    }
+    match /discountTypes/{discountTypeId} {
+      allow read;
+      allow write: if false;
+    }
+    match /doctors/{doctorId} {
+      allow read;
+      allow write: if false;
+    }
+    match /employees/{employeeId} {
+      allow read;
+      allow write: if false;
+    }
+      match /logs/{logId} {
+      allow read;
+      allow write: if false;
+    }
+     match /sessions/{sessionId} {
+      allow read;
+      allow write: if false;
+    }
+    match /specialities/{specialtyId} {
+      allow read;
+      allow write: if false;
+    }
+    match /drawers/{drawerId} {
+      allow read;
+      allow write: if false;
+    }
+    match /transactions/{drawerId} {
+      allow read;
+      allow write: if false;
+    }
+  }
+}

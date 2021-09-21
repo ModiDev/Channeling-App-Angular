@@ -1,0 +1,75 @@
+<div class="d-none">
+    <div id="receipt-print-section">
+        <h2>SOUTHERN LANKA HOSPITALS</h2>
+        <label>Confirmed booking receipt</label>
+        <div class="t-row">
+            <div style="text-align: left;"><label class="title" style="font-weight: bold;">Patient No: {{data.patientNo}}</label></div>
+            <div style="text-align: right;"><label>Invoice No: {{data.invoiceNo}}</label></div>
+        </div>
+        <div class="t-row-2">
+            <div class="title">Patient Name</div>
+            <div>: {{data.patientName}}</div>
+        </div>
+        <div class="t-row-2">
+            <div class="title">Contact No</div>
+            <div>: {{data.contact}}</div>
+        </div>
+        <div class="t-row-2">
+            <div class="title">Doctor Name</div>
+            <div>: {{data.doctorName}}</div>
+        </div>
+        <div class="t-row-2">
+            <div class="t-row-2">
+                <div class="title">Booking Date</div>
+                <div>: {{data.bookingDate | date: 'yyyy-MM-dd'}}</div>
+            </div>
+            <div class="t-row-2">
+                <div class="title" style="text-align: right;padding-right: 10px;">Session</div>
+                <div>: {{data.sessionStartAt | date: 'hh:mm a'}} - {{data.sessionEndAt | date: 'hh:mm a'}}</div>
+            </div>
+        </div>
+        <div>
+            <table style="border-collapse: collapse;">
+                <thead style="border-top:1px dashed black;border-bottom:1px dashed black;">
+                    <th></th>
+                    <th>Hospital Fee</th>
+                    <th>Doctor Fee</th>
+                    <th>Total</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fee of data.fees">
+                        <td>{{fee.name}}</td>
+                        <td>Rs.{{fee.hospitalFee}}</td>
+                        <td>Rs.{{fee.doctorFee}}</td>
+                        <td>Rs.{{fee.total}}</td>
+                    </tr>
+                 
+                    <tr style="border-top:1px dashed black;">
+                        <td colspan="2">Payment type:{{data.paymentType}}</td>
+                        <td>Total</td>
+                        <td>Rs.{{data.total}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-size: 26px;font-weight: bold;"><span *ngIf="data.isRefund">Refund:Rs.{{data.refundAmmount}}</span></td>
+                        <td>Misc.</td>
+                        <td>Rs.{{data.misc}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span *ngIf="data.isRefund">Refund By:{{data.createdBy}}</span></td>
+                        <td>Discount</td>
+                        <td>Rs.{{data.discount}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span *ngIf="data.isRefund">{{data.createdAt | date: 'yyyy-MM-dd hh:mm'}}</span></td>
+                        <td>Paid</td>
+                        <td>Rs.{{data.paid}}</td>
+                    </tr>
+                    <tr style="border-top:1px solid black;">
+                        <td colspan="2">{{data.createdBy}}</td>
+                        <td colspan="2">{{data.createdAt | date: 'yyyy-MM-dd hh:mm'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

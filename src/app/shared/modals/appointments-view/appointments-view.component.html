@@ -1,0 +1,164 @@
+<div class="background-card">
+    <div class="row ms-1 mt-2">
+        <div class="col title-name mt-2 mb-3">
+            <h6 style="font-size: 18px;"><span> {{ this.isRefund ? "REFUND" : "" }}</span> {{appointmentTitle + " " +
+                booking.referenceNo}}</h6>
+        </div>
+        <div class="col-1 ms-4" style="padding-left: 30px">
+            <fa-icon class="btn" [icon]=" faEllipsis" style="color: #7a7a7a; font-size: 20px;"
+                (click)="openBookingLogs()"></fa-icon>
+        </div>
+        <div class="col-1">
+            <fa-icon class="btn" [icon]=" faEdit" style="color: #7a7a7a;font-size: 20px;" (click)="openEditBooking()">
+            </fa-icon>
+        </div>
+        <div class="col-1 mt-2 ms-1" style="margin-top: 10px !important;">
+            <button type="button" class="btn btn-close" (click)="activeModal.dismiss('Cross click')">
+                <fa-icon [icon]="faCross" class=" d-flex mb-auto mt-auto " style="color: #f1f1f1 ">
+                </fa-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row mb-2 ms-1">
+        <div class="col-3">
+            <label class="form-label">Name</label>
+            <div class="">
+                <label class="sub-text"> {{ booking.patientName }} </label>
+            </div>
+        </div>
+        <div class="col mb-1 ms-2">
+            <label class="form-label">Status</label>
+            <div class="">
+                <label style="text-transform: capitalize" class="sub-text" [ngClass]="booking.bookingStatus == 'CONFIRMED' ? 'Confirmed'
+            : booking.bookingStatus=='TENTATIVE' ? 'Tentative'
+            : booking.bookingStatus== 'CANCELLED'? 'Cancelled': 'some-class__normal'">
+                    {{ booking.bookingStatus.toLowerCase() }}
+                </label>
+            </div>
+        </div>
+        <div class="col" *ngIf="!isTentative">
+            <label class="form-label">Payment Method</label>
+            <div class="" style="padding-right: 250px">
+                <label class="sub-text" style="text-transform: capitalize"> {{ booking.paymentMethod.toLowerCase() }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row ms-1 mb-2">
+        <div class="col-3">
+            <div class="row mb-3">
+                <label class="form-label">Age</label>
+                <div class="">
+                    <label class="sub-text"> {{ booking.patient?.age }} </label>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <label class="form-label">Contact Number</label>
+                <div class="col">
+                    <label class="sub-text"> {{ booking.patient?.mobile }} </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <table class="table table-responsive">
+                <tr style="border-bottom: 1px solid #F7F7F7">
+                    <th scope="col" style="text-align: left;padding-left: 8px;">Payment</th>
+                    <th scope="col">Hospital Fee(Rs.)</th>
+                    <th scope="col">Doctor Fee(Rs.)</th>
+                    <th scope="col">Total Fee(Rs.)</th>
+                </tr>
+                <tbody>
+                    <tr *ngFor=" let service of booking.services; let i=index;"
+                        style="border-bottom: 1px solid #F7F7F7">
+                        <td style="padding-right: 0 !important;text-align: left;">{{ service.service.toString() }}</td>
+                        <td> {{ service.doctorFee }} </td>
+                        <td> {{ service.hospitalFee }} </td>
+                        <td> {{ service.doctorFee + service.hospitalFee }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label">PatientNo</label>
+                <div class="col">
+                    <label class="sub-text"> {{ booking.patientNo }} </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <label class="form-label">NIC/PassportNo</label>
+                <div class="col">
+                    <label class="sub-text"> {{ booking.patient?.nicOrPassport}} </label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="justify-content: flex-end;">
+            <div class="row w-75" *ngIf="!isCardPayment" style="border-bottom: 1px solid #F7F7F7;width: 474px;">
+                <div class="col-6" >
+                    <label class="form-label" style="color: #F94162;font-size: 14px;">Pay by Cash Discount</label>
+                </div>
+                <div class="col-3" style="flex: 1;text-align: right;">
+                    <label class="form-label" style="color: #F94162;font-size: 14px;text-align: right;">-{{
+                        payByCashDiscount }} </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="isRefund">
+        <form [formGroup]="formGroup">
+            <div class="row form-group mb-3 ms-4 refun-form">
+                <div class="col-8">
+                    <div class="">
+                        <label class="form-label">Refund Reason</label>
+                        <input type="text" class="form-control" formControlName="reason">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class=" ms-0">
+                        <label class="form-label">Refund Amount</label>
+                        <input type="number" class="form-control" formControlName="amount">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row mb-2 mt-3 ms-1">
+        <label class="form-label">Address</label>
+        <div class="col">
+            <label class="sub-text" style="width: 40%"> {{ booking.patient?.address }} </label>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-3">
+                <label class="form-label ms-lg-5" style="padding-left: 70px;font-size: 14px;">Total</label>
+            </div>
+            <div class="col-3" style="text-align: right;">
+                <label class="table-sub-font ms-lg-3" style="font-size: 14px;"><b> {{ totalFee }} </b></label>
+            </div>
+        </div>
+        <div class="row pe-0">
+            <hr style="width: 31%;color: #41DC80;margin-left: auto;height: 2px;">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col mb-2">
+            <button class="btn btn-inactive" style="width: 180px" (click)="onCancel()">{{cancelButtonTitle}}
+            </button>
+        </div>
+        <div class="col mb-2" *ngIf="!isConfirmed">
+            <button class="btn btn-reusable" style="width: 180px" (click)="onConfirm()">{{confirmButtonTitle}}
+            </button>
+        </div>
+        <div class="col mb-2" *ngIf="isConfirmed">
+            <button class="btn btn-reusable" style="width: 180px" (click)="printBill()">print bill
+            </button>
+        </div>
+    </div>
+</div>
+<div *ngIf="printTamplateData">
+    <app-receipt-template [data]="printTamplateData"></app-receipt-template>
+</div>

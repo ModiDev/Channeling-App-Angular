@@ -1,0 +1,76 @@
+<div class="model-content-wrapper">
+    <div class="model-title">
+        <h6  class="main-title">DRAWER LOGS</h6>
+        <div class="actions">
+            <div class="search-input">
+                <input type="text" style="height: 25px;min-height: 25px;width: 135px;" class="form-control form-control-sm" aria-label="Search" placeholder="Search"
+                    >
+                    <!-- [ngModel]="inputText" (ngModelChange)="onChangeSearchText($event)" -->
+                <button class="btn btn-search">
+                    <fa-icon [icon]=" searchIcon" style="color: #f1f1f1"></fa-icon>
+                </button>
+            </div>
+            <button type="button" class="btn btn-close" style="margin-left: 20px;" (click)="activeModal.dismiss('Cross click')">
+                <fa-icon [icon]="faCross" class=" d-flex mb-auto mt-auto " style="color: #f1f1f1 ">
+                </fa-icon>
+            </button>
+        </div>
+      
+    </div>
+    <div class="row1" style="font-size: 12px;">
+        <div class="row1-item">
+            <div style="color: #9C9C9C;">Drawer No</div>
+            <div>Drawer 01</div>
+        </div>
+        <div class="row1-item">
+            <div style="color: #9C9C9C;">Drawer Name</div>
+            <div>Drawer 01 Pc</div>
+        </div>
+        <div class="row1-item">
+            <div style="color: #9C9C9C;">Last Drawer Session ID</div>
+            <div>0004</div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+  
+    <div >
+        <div class="row2">
+            <div>
+                <div class="mb-2" style="font-weight: bold;color: #2A2A2A;">Drawer Session Id</div>
+                <div>001</div>
+            </div>
+            <div>
+                <div class="mb-2" style="font-weight: bold;color: #2A2A2A;">Activity</div>
+                <div>
+                    <div>Log in</div>
+                    <div>May 05,2021,04.15 PM</div>
+
+                    <div class="mt-2">Log out</div>
+                    <div>May 05,2021,04.15 PM</div>
+                    <div>Confirmed Appointments: 25</div>
+
+
+                    <div class="mt-2">B/F From Previous Cashier : 10,000</div>
+                    <div>Confirmed Cash Payment Appointments : 20,000</div>
+                    <div>Cash Received from Cashiers : 60,000</div>
+                    <div>Total Cash Received : 90,000 </div>
+
+
+                    <div class="mt-2">Sales Refund Made : -6000</div>
+                    <div>Doctor Payments Made : -19000</div>
+                    <div>Cash Transfered to Cashiers : 25000</div>
+                    <div>Petty Cash Payments Made : 20000</div>
+                    <div>Total Cash Received : 70,000</div>
+
+                    <div class="mt-3">Cash in Hand : 45000</div>
+                </div>
+            </div>
+            <div>
+                <div class="mb-2" style="font-weight: bold;color: #2A2A2A;">User</div>
+                <div>001</div>
+            </div>
+        </div>
+    </div>
+</div>

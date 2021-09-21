@@ -1,0 +1,111 @@
+<div class="background-card">
+    <app-loading></app-loading>
+    <div class="row ms-3">
+        <div class="row">
+            <div class="col-7 title-name mt-2 mb-3">
+                <h6><span>{{doctor?.name}} </span></h6>
+            </div>
+            <div class="col ms-0" style="padding-left: 110px">
+                <fa-icon class="btn" [icon]=" faEdit" style="color: #7a7a7a" (click)="showDoctorEditModel()">
+                </fa-icon>
+            </div>
+            <div class="col mt-2">
+                <button type="button" class="btn btn-close ms-3" (click)="activeModal.dismiss('Cross click')">
+                    <fa-icon [icon]="faCross" class=" d-flex mb-auto mt-auto " style="color: #f1f1f1 ">
+                    </fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row ms-0">
+        <div class="col">
+            <div class="row ms-1">
+                <div class="col">
+                    <div class="label-main">
+                        <label class=" control-label">Speciality</label>
+                    </div>
+                    <div class="">
+                        <div class="col">
+                            <label
+                                class="label-content control-label mb-4 label-sub">{{doctor?.specialty?.toString() | uppercase}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="label-main">
+                        <label class=" control-label">Contact Number</label>
+                    </div>
+                    <div class="">
+                        <div class="col">
+                            <label class="label-content control-label mb-4 label-sub">{{doctor?.contact}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="label-main mb-1">
+                        <label class="cs-name control-label">Email</label>
+                    </div>
+                    <div class="label-sub mb-4">
+                        <div class="col">
+                            <label class="label-content control-label mb-4 label-sub">{{doctor?.email}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="label-main">
+                        <label class="cs-name control-label">Hospital</label>
+                    </div>
+                    <div class="">
+                        <div class="col">
+                            <label class="label-content control-label mb-4 label-sub">{{doctor?.hospital}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="">
+                <img [src]="doctor?.profileImgUrl" alt="image-doctor" style="height: 140px;width: 140px" class="ms-2"
+                     onerror="this.src='https://www.asvinshospitals.com/wp-content/uploads/2019/10/default-placeholder-doctor-half-length-Copy.jpg'"
+                     width="140" height="140">
+            </div>
+        </div>
+    </div>
+    <div class="row ms-2 mb-2">
+        <table *ngIf="doctor?.services" class="table table-responsive">
+            <tr style="border-bottom: 1px solid #cccccc">
+                <th scope="col" style="padding-left: 10px">Payment</th>
+                <th scope="col">Hospital Fee(Rs.)</th>
+                <th scope="col">Doctor Fee(Rs.)</th>
+                <th scope="col">CashPay Discount(Rs.)</th>
+            </tr>
+            <tbody>
+            <tr *ngFor="let service of doctor?.services; let i = index;">
+                <td scope="col">{{ service.service.toString() }}</td>
+                <td> {{ service.hospitalFee }} </td>
+                <td> {{ service.doctorFee }} </td>
+                <td> {{ service.cashDiscountFee }} </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row mb-4 ms-2">
+        <div class="col">
+            <button class="btn btn-inactive " style="width: 250px" (click)="inactiveDoctor()"
+                    [ngClass]=" doctor.status === activeStatusActive ? buttonInactive : buttonActive ? 'button-active': 'error' ">{{
+                doctor.status === activeStatusActive ? buttonInactive : buttonActive }}
+            </button>
+        </div>
+        <div class="col me-2">
+            <button class="btn btn-blue-add" style="width: 250px">{{buttonSessions}}
+            </button>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,30 @@
+.control-label{
+  font-family: "Roboto";
+  font-size: 12px;
+  color: var(--text-color-light-gray);
+  margin-top: 15px;
+}
+.label-sub{
+  font-family: "Roboto";
+  font-size: 12px;
+  color: var(--text-color-light-gray);
+  margin-top: 15px;
+  width: 91.5%;
+}
+.form-row{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  .d-flex{
+    label{
+      width: 100px;
+    }
+  }
+}
+
+.form-error-message{
+  font-family: "Roboto-light";
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--error-message-text-color-red);
+}

@@ -1,0 +1,58 @@
+.alert-dialog-wrapper {
+  padding: 21px 23px;
+  width: 26.5rem;
+  .title {
+    h5 {
+      font-family: "Roboto";
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 19px;
+      letter-spacing: 0em;
+      text-align: center;
+
+      color: var(--text-color-gray);
+    }
+  }
+  .close-button {
+    button {
+      background: var(--button-gradient-pink);
+      padding: 0%;
+    }
+  }
+  .description {
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: var(--text-color-gray);
+  }
+
+  .primary-form-button {
+    font-size: 13px;
+    font-family: "Roboto-medium";
+    font-weight: 700;
+    background: var(--button-gradient-green);
+    box-shadow: var(--button-drop-shadow-light);
+  }
+  .primary-form-button-red {
+    font-size: 13px;
+    font-family: "Roboto-medium";
+    font-weight: 700;
+    background: var(--button-gradient-pink);
+    box-shadow: var(--button-drop-shadow-light);
+  }
+
+  .primary-form-button:hover {
+    background: var(--button-gradient-green-hover);
+  }
+  .primary-form-button-red:hover {
+    background: var(--button-gradient-pink-hover);
+  }
+}
+
+::ng-deep .my-class-alert .modal-dialog {
+  max-width: 26.5rem;
+  width: 26.5rem;
+}

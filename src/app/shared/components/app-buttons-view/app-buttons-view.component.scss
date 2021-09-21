@@ -1,0 +1,18 @@
+.btn-reusable{
+  width: 120px;
+  height: 30px;
+  color: var(--div-background-color);
+
+
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+
+  text-transform: uppercase;
+  background: var(--button-gradient-green);
+  box-shadow: 0px 0px 25px rgba(215, 215, 215, 0.28);
+  border-radius: 4px;
+}

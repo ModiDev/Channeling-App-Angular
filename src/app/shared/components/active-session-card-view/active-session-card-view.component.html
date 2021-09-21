@@ -1,0 +1,29 @@
+<div class="card-wrapper" routerLink="/dashboard/active" (click)="onClick($event)"
+     [ngClass]="{ 'card-body-selected' : isSelected}">
+    <div class="card-row">
+        <div class="card-text-name">{{ "" + session.doctor?.title + " " +session.doctor?.name }}</div>
+        <div class="card-text-user">
+            <fa-icon [icon]="fauser" class="fa-xs"></fa-icon>&nbsp; {{ session.currentNumber + 1 }}
+        </div>
+    </div>
+    <div class="card-row mt-2">
+        <div class="card-text-position"> {{ session.doctor?.specialty }}</div>
+        <div class="card-text-active">
+            <fa-icon [icon]="faCashRegister" class="fa-xs"></fa-icon>&nbsp; {{ session.bookingCount }}
+        </div>
+    </div>
+    <div class="card-row mt-2">
+        <div class="col-time">
+            <div class="card-text-time my-0">
+                {{ session.startsAt.toLocaleTimeString([], { hour: '2-digit',minute:'2-digit', hour12: true }) }}
+            </div>
+            <div class="card-text-time my-0">
+                {{ session.endsAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) }}
+            </div>
+        </div>
+        <div class="col-time">
+            <app-add-booking-button class="btn-primary-plus" [session]="session" (click)="onClick($event)">
+            </app-add-booking-button>
+        </div>
+    </div>
+</div>

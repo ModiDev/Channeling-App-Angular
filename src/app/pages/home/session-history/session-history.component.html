@@ -1,0 +1,98 @@
+<div class="col content pe-3">
+    <div class="row">
+        <div class=" action-bar-wrapper g-0">
+            <div class="back-btn ps-3 pe-1" *ngIf="isSearchPage" (click)="goBack()">
+                <fa-icon [icon]="faBack" class="fa-lg"></fa-icon>
+            </div>
+            <div class="title ps-3 me-auto">{{isSearchPage ? "History Search" : "History"}}</div>
+            <div class="date-title me-3"> Date</div>
+            <div class="" [formGroup]="dateSearchForm">
+                <input type="date" style="height: 30px;" class="form-control form-control-sm date-input"
+                    formControlName="date">
+            </div>
+            <div class="end-wrapper">
+                <div class="search-input" style="width: 345px;">
+                    <input type="text" style="height: 30px;" class="form-control form-control-sm" aria-label="Search"
+                        placeholder="Search by name or phone" [ngModel]="inputText"
+                        (ngModelChange)="onChangeSearchText($event)">
+                    <button [disabled]="searchText.length < 3" class="btn btn-search" (click)="isSearchPage = true">
+                        <fa-icon [icon]=" searchIcon" style="color: #f1f1f1"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row bg-white table-wrapper" *ngIf="isSearchPage">
+        <div>
+            <app-appointments-table [searchText]="searchText" [bookings]="bookings"></app-appointments-table>
+        </div>
+    </div>
+    <div class="row" *ngIf="!isSearchPage">
+        <div class="col second-row mb-2 ps-3 pe-2">
+            <div class="row mb-1 g-0">
+                <div class="col px-0">
+                    <div class="section-title" *ngIf="doctor">
+                        <div class="title me-2 d-none d-sm-block">
+                            <h6> {{ (doctor?.title ?? "") + " " + ( doctor?.name ?? "") }} <span> | </span> </h6>
+                        </div>
+                        <div class="contact me-2 d-none d-lg-block">
+                            <h6> {{ doctor?.specialty?.toUpperCase() ?? "" }} <span> | </span></h6>
+                        </div>
+                        <div class="contact d-none d-md-block">
+                            <h6> {{ doctor?.contact ?? "" }}</h6>
+                        </div>
+                        <div class="empty-message-type ms-lg-5 mb-2">
+                            <span *ngIf="getSessions().length <= 0">There are no history available</span>
+                        </div>
+                        <button class="scroll-button btn ms-auto me-2 px-4" (click)="list.scroll(-1)"
+                            [disabled]="!isActiveSessionsOverflowed">
+                            <fa-icon [icon]="faAngleLeft" class="mt-0 mb-0 btn-icon fa-lg"></fa-icon>
+                        </button>
+                        <button class="scroll-button btn px-4 me-1" (click)="list.scroll(1)"
+                            [disabled]="!isActiveSessionsOverflowed">
+                            <fa-icon [icon]="faAngleRight" class="mt-0 mb-0 btn-icon fa-lg"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-1 sessions-row overflow-auto list me-1" appScrollable #list="appScrollable"
+                [scrollUnit]="300" #activeSessions>
+                <div class="col me-3" *ngFor="let session of getSessions()">
+                    <app-session-history-card [session]="session" (onSelectedEvent)="globallySelectedSession($event)"
+                        [isGloballySelected]="session.id === globallySelectedSessionId">
+                    </app-session-history-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="!isSearchPage">
+        <div class="col third-row  pe-2">
+            <div class="row g-0 mb-3">
+                <div class="col px-0">
+                    <div class="section-title">
+                        <div class="title-history ms-3 d-none d-sm-block">
+                            <h6> Doctor Payment </h6>
+                        </div>
+                        <div class="col" style="padding-right: 10px">
+                            <select class="form-control form-control-sm form-select-sm ms-auto drop-down-input"
+                                style="width: 165px" [(ngModel)]="statusFilter">
+                                <option value="">All</option>
+                                <option value="CONFIRMED" selected> Confirmed</option>
+                                <option value="TENTATIVE"> Tentative</option>
+                                <option value="CANCELLED"> Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="ms-auto">
+                            <app-search-bar placeholderText="Search by Name or Phone"
+                                (onChangedEvent)="searchTextBooking = $event"></app-search-bar>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid g-0 px-3 upcoming-session-list ">
+                <app-scroll-table [session]="selectedSession" [searchText]="searchTextBooking"
+                    [statusFilter]="statusFilter"></app-scroll-table>
+            </div>
+        </div>
+    </div>
+</div>

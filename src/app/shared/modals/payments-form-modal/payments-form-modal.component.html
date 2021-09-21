@@ -1,0 +1,153 @@
+<div class="payment-wrapper">
+  <app-loading></app-loading>
+  <div class="row g-0">
+    <div class="col title">
+      <h5> PAYMENT </h5>
+    </div>
+    <div class="col-2 close-button">
+      <button class="btn ms-auto d-flex py-1" (click)="activeModal.dismiss('Cross click')">
+        <fa-icon [icon]="faTimes" class="m-0 sm" style="color: #f1f1f1 "></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="py-2">
+    <div *ngIf="error.length" class="payment-error">
+      {{ error }}
+    </div>
+  </div>
+  <div class="form-container" *ngIf="isFirstPage">
+    <form [formGroup]="paymentForm">
+      <fieldset>
+        <div class="form-group mt-2">
+          <label for="pf-paymentType" class="form-label">Payment Type<span>*</span></label>
+          <select id="pf-paymentType" class="form-select form-control custom-select" formControlName="paymentType">
+            <option *ngFor="let payment of paymentTypes" [ngValue]="payment"> {{ payment }}</option>
+          </select>
+        </div>
+        <div formGroupName="drawerTransfer" *ngIf="paymentForm.get('paymentType')?.value === 'Share money to cashier'">
+          <div class="form-group mt-2">
+            <label for="pf-cashierName" class="form-label">Cashier Name<span>*</span></label>
+            <select id="pf-cashierName" class="form-select form-control custom-select" formControlName="cashierName">
+              <option *ngFor="let cashier of cashiers" [ngValue]="cashier.uid"> {{ cashier.displayName }}</option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <label for="pf-amount" class="form-label">Amount<span>*</span></label>
+            <input type="number" class="form-control" id="pf-amount" required formControlName="amount"
+              [ngClass]="{'form-input-error' : paymentForm.get(['drawerTransfer', 'amount'])?.invalid && (paymentForm.get(['drawerTransfer', 'amount'])?.dirty || paymentForm.get(['drawerTransfer', 'amount'])?.touched)}">
+            <div
+              *ngIf="paymentForm.get(['drawerTransfer', 'amount'])?.invalid && (paymentForm.get(['drawerTransfer', 'amount'])?.dirty || paymentForm.get(['drawerTransfer', 'amount'])?.touched)"
+              class="form-error-message mt-1">
+              <div *ngIf="paymentForm.get(['drawerTransfer', 'amount'])?.errors?.required">
+                <p> Amount field can't be empty </p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mt-2 mb-4">
+            <label for="pf-description" class="form-label">Description</label>
+            <textarea type="text" class="form-control long-text-input" id="pf-description"
+              formControlName="description"></textarea>
+          </div>
+        </div>
+        <div formGroupName="doctorPayment" *ngIf="paymentForm.get('paymentType')?.value === 'Pay to doctor'">
+          <div class="form-group mt-2">
+            <label for="pdp-doctorName" class="form-label">Doctor Name<span>*</span></label>
+            <select id="pdp-doctorName" class="form-select form-control custom-select" formControlName="doctorName">
+              <option *ngFor="let doctor of doctors" [ngValue]="doctor.id"> {{ doctor.title + " " + doctor.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <fieldset [disabled]="isSessionsLoading">
+              <label for="pdp-session" class="form-label">Session<span>*</span></label>
+              <select id="pdp-session" class="form-select form-control custom-select" formControlName="sessionId">
+                <option *ngFor="let session of sessions" [ngValue]="session.id"> {{session.startsAt | date:
+                  'hh:mm a'}} {{ session.sessionDate | date: 'yyyy/MM/dd'}}
+                </option>
+              </select>
+            </fieldset>
+          </div>
+          <div class="form-group mt-2 mb-4">
+            <label for="pdp-description" class="form-label">Description<span>*</span></label>
+            <textarea type="text" class="form-control long-text-input" id="pdp-description" required
+              formControlName="description"></textarea>
+          </div>
+          <div class="row g-0 doctor-payment-details">
+            <div class="col">
+              <h5> No of Appointments</h5>
+              <h4> {{ bookingPayments.length }} </h4>
+            </div>
+            <div class="col">
+              <h5 style="text-align: right;"> Payment Amount (Rs)</h5>
+              <h4 style="text-align: right;"> {{ totalDoctorPayment }} </h4>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="otherPayment" *ngIf="paymentForm.get('paymentType')?.value === 'Petty cash payment'">
+          <div class="form-group mt-2">
+            <label for="pcp-amount" class="form-label">Amount<span>*</span></label>
+            <input type="number" class="form-control" id="pcp-amount" required formControlName="paymentAmount"
+              [ngClass]="{'form-input-error' : paymentForm.get(['otherPayment', 'paymentAmount'])?.invalid && (paymentForm.get(['otherPayment', 'paymentAmount'])?.dirty || paymentForm.get(['otherPayment', 'paymentAmount'])?.touched)}">
+            <div
+              *ngIf="paymentForm.get(['otherPayment', 'paymentAmount'])?.invalid && (paymentForm.get(['otherPayment', 'paymentAmount'])?.dirty || paymentForm.get(['otherPayment', 'paymentAmount'])?.touched)"
+              class="form-error-message mt-1">
+              <div *ngIf="paymentForm.get(['otherPayment', 'paymentAmount'])?.errors?.required">
+                <p> Amount field can't be empty </p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mt-2 mb-4">
+            <label for="pcp-description" class="form-label">Description<span>*</span></label>
+            <textarea type="text" class="form-control long-text-input" id="pcp-description" required
+              formControlName="description"
+              [ngClass]="{'form-input-error' : paymentForm.get(['otherPayment', 'description'])?.invalid && (paymentForm.get(['otherPayment', 'description'])?.dirty || paymentForm.get(['otherPayment', 'description'])?.touched)}"></textarea>
+            <div
+              *ngIf="paymentForm.get(['otherPayment', 'description'])?.invalid && (paymentForm.get(['otherPayment', 'description'])?.dirty || paymentForm.get(['otherPayment', 'description'])?.touched)"
+              class="form-error-message mt-1">
+              <div *ngIf="paymentForm.get(['otherPayment', 'description'])?.errors?.required">
+                <p> Description field can't be empty </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group button-container mt-4 mb-3">
+          <button type="button" [disabled]="paymentForm.get('paymentType')?.value === 'Share money to cashier' ?  
+            paymentForm.get(['drawerTransfer'])?.invalid : paymentForm.get('paymentType')?.value === 'Pay to doctor' ?  
+            paymentForm.get(['doctorPayment'])?.invalid :  paymentForm.get(['otherPayment'])?.invalid"
+            (click)="onConfirm()" class="btn btn-block lift text-white primary-form-button col-12">
+            CONFIRM
+          </button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div *ngIf="!isFirstPage" class="print-bill-page">
+    <div class="mt-4 title">
+      <h6>Doctor</h6>
+      <h3> {{ selectedDoctor.name }} </h3>
+    </div>
+    <div class="mt-4 title">
+      <h6>Session</h6>
+      <h3> {{selectedSession.startsAt | date: 'hh:mm a'}} - {{selectedSession.sessionDate | date: 'yyyy-MM-dd' }}
+      </h3>
+    </div>
+    <div class="row g-0 doctor-payment-details mt-4">
+      <div class="col">
+        <h5> No of Appointments</h5>
+        <h4> {{ bookingPayments.length }}</h4>
+      </div>
+      <div class="col">
+        <h5 style="text-align: right;"> Payment Amount (Rs)</h5>
+        <h4 style="text-align: right;"> {{ totalDoctorPayment }} </h4>
+      </div>
+      <button type="button" (click)="printPayment()"
+        class="btn btn-block lift text-white primary-form-button-print col-12 mt-4">
+        PRINT BILL
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="doctorPaymentData">
+  <app-doctor-payment-template [data]="doctorPaymentData"> </app-doctor-payment-template>
+</div>

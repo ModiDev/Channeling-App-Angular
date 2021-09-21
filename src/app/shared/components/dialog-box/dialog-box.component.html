@@ -1,0 +1,27 @@
+<div class="dialog-wrapper">
+  <div class="row g-0">
+    <div class="col d-flex title justify-content-center">
+      <h5 class="mb-0 mt-1 d-flex ms-4"> {{ title }} </h5>
+    </div>
+    <div class="col-1 close-button">
+      <button class="btn ms-auto d-flex px-1 py-0" (click)="activeModal.dismiss('Cross click')">
+        <fa-icon [icon]="faCross" class="m-0 sm" style="color: #f1f1f1 "></fa-icon>
+      </button>
+    </div>
+  </div>
+  <p class="description my-2 mx-4">
+    {{ description }}
+  </p>
+  <div class="row">
+    <div class="col form-group button-container mt-2 ">
+      <button type="button" class="btn btn-block lift text-white primary-form-button-red col-12"
+        (click)="onPress(false)"> NO
+      </button>
+    </div>
+    <div class="col form-group button-container mt-2">
+      <button type="submit" class=" btn btn-block lift text-white primary-form-button col-12" (click)="onPress(true)">
+        YES
+      </button>
+    </div>
+  </div>
+</div>

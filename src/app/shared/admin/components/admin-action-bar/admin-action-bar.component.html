@@ -1,0 +1,23 @@
+<div class="action-bar-wrapper">
+    <div class="title">{{titleAdmin}}</div>
+    <div class="end-wrapper">
+        <div class="selection">
+            <select style="height: 30px; width: 166px;" class="form-control form-control-sm drop-down-input"
+            [ngModel]="searchType" (ngModelChange)="onChangeSearchType($event)">
+                <option value="all">All</option>
+                <option value="ACTIVE">Active</option>
+                <option value="DE-ACTIVE">Inactive</option>
+            </select>
+        </div>
+        <div class="search-input">
+            <input type="text" style="height: 30px;width: 300px;" class="form-control form-control-sm" aria-label="Search" placeholder="Search"
+                [ngModel]="inputText" (ngModelChange)="onChangeSearchText($event)">
+            <button class="btn btn-search">
+                <fa-icon [icon]=" searchIcon" style="color: #f1f1f1"></fa-icon>
+            </button>
+        </div>
+        <div class="action-button">
+            <button class="btn btn-action" (click)="onActionClick()">{{actionButtonText}}</button>
+        </div>
+    </div>
+</div>

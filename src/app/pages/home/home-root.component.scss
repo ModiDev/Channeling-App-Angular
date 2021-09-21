@@ -1,0 +1,19 @@
+/*============ Side Bar ==========*/
+.container-fluid {
+  padding-left: 0%;
+  .row-flex {
+    display: flex;
+    flex-direction: row;
+    .side-bar-component {
+      height: calc(100vh - 4.125rem);
+      padding: 0%;
+      flex-basis: 17.813rem;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+    .content-container {
+      flex: 1 1 auto;
+      max-width: calc(100vw - 20.1rem);
+    }
+  }
+}

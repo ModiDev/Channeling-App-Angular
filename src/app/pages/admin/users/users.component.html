@@ -1,0 +1,37 @@
+<app-admin-action-bar titleAdmin ="USER MANAGEMENT" (onSearchTextChange)="onChangeSearchText($event)"
+  (onSearchTypeChange)="onChangeSearchType($event)" (onAction)="onActionClick()" actionButtonText="ADD USER"></app-admin-action-bar>
+<div class="container-fluid panel">
+  <div class="row">
+    <div>
+      <table class="mytable">
+        <tr>
+          <th>Agent No <fa-icon [icon]="sortIcon" class="fa-xs"
+            style="margin-left: 5px;cursor: pointer;"></fa-icon></th>
+          <th>First Name <fa-icon [icon]="sortIcon" class="fa-xs"
+            style="margin-left: 5px;cursor: pointer;"></fa-icon></th>
+          <th>Last Name <fa-icon [icon]="sortIcon" class="fa-xs"
+            style="margin-left: 5px;cursor: pointer;"></fa-icon></th>
+          <th>Working Place</th>
+          <th>Contact Number</th>
+          <th>User Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td >{{user.AgetNo}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.workingPlace}}</td>
+          <td>{{user.contactNumber}}</td>
+          <td>{{user.userName}}</td>
+          <td class="table-action-icon">
+            <fa-icon [icon]="inactiveIcon" class="fa-xs"></fa-icon>
+          </td>
+          <td class="table-action-icon">
+            <fa-icon [icon]="faEdit" class="fa-xs"></fa-icon>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

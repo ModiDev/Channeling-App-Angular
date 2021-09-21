@@ -1,0 +1,90 @@
+/*============ Nav Bar ==========*/
+
+.nav-bar-div {
+  background-color: var(--div-background-color);
+  padding: 0%;
+  .navbar {
+    padding: 5px;
+  }
+  .navbar-brand {
+    padding: 0%;
+  }
+  .main-title {
+    cursor: pointer;
+    h3 {
+      font-family: "Roboto", sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 0%;
+    }
+
+    span {
+      font-family: "Roboto-Light";
+      font-weight: 200;
+    }
+  }
+
+  .collapse-btn {
+    padding-left: 0%;
+  }
+
+  .navbar-items {
+    .nav-item {
+      .active {
+        color: var(--text-color-purple);
+      }
+    }
+
+    .nav-link {
+      color: var(--text-color-gray);
+      font-size: 14px;
+      font-family: "Roboto";
+    }
+
+    .nav-link:hover {
+      color: var(--text-color-purple);
+    }
+  }
+
+  .user-details {
+    display: flex;
+    fa-icon {
+      font-size: 25px;
+      align-self: center;
+      padding-left: 42px;
+      padding-bottom: 0;
+      padding-top: 0;
+      color: var(--icon-color-light-gray);
+    }
+  }
+
+  .log-out-div {
+    background-color: white;
+    z-index: 100;
+    position: absolute;
+    right: 30px;
+    top: 60px;
+    border-radius: 4px;
+    cursor: pointer;
+    .log-out-div-item {
+      padding: 10px 18px;
+      .icon {
+        color: var(--icon-color-gray);
+        width: 20%;
+      }
+      h6 {
+        color: var(--text-color-black);
+        font-family: "Roboto";
+        font-weight: 300;
+        font-size: 14px;
+        padding-right: 30px;
+      }
+    }
+    .log-out-div-item:hover {
+      background-color: var(--div-border-color);
+    }
+    .log-out-div-border {
+      border-bottom: 1px solid var(--div-border-color);
+    }
+  }
+}

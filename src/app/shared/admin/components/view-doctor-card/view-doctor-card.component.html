@@ -1,0 +1,15 @@
+<div class="doctor-card-wrapper" style="cursor: pointer;">
+    <div class="profile-image">
+        <img [src]="doctor?.profileImgUrl" alt="image-doctor" onerror="this.src='https://www.asvinshospitals.com/wp-content/uploads/2019/10/default-placeholder-doctor-half-length-Copy.jpg'"/>
+    </div>
+    <div class="profile-details">
+        <div class="text-t1">{{doctor?.name}}</div>
+        <div class="text-t2">{{doctor?.specialty?.toString() | uppercase}}</div>
+        <div class="text-t2 mt-2">{{doctor?.contact}}</div>
+        <div class="text-t2">{{doctor?.email}}</div>
+        <div class="text-t2 c-row">
+            <div>{{doctor?.hospital}}</div>
+            <div *ngIf="isInactive" class="inactive">Inactive</div>
+        </div>
+    </div>
+</div>

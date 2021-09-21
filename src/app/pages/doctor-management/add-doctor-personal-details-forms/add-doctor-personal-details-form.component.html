@@ -1,0 +1,74 @@
+<div [formGroup]="formGroup">
+    <div class="form-group required ms-0">
+        <label class=" control-label">Name</label>
+        <input type="limit" class="form-control form-control-sm" formControlName="name"
+            placeholder="Enter The Doctor's Name" style="width: 427px">
+        <div class="form-error-message" *ngIf="isInvalidWhile('name')">
+            Please Enter The Name
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group required ms-0">
+            <label class="control-label">Speciality</label>
+            <select class="form-control form-control-sm drop-down-input" formControlName="speciality"
+                style="width: 239px">
+                <option value="" class="cs-name">Select the Speciality</option>
+                <option *ngFor="let specialty of specialties" [ngValue]="specialty.name">{{specialty.name | titlecase}}
+                </option>
+            </select>
+            <div class="form-error-message" *ngIf="isInvalidWhile('speciality')">
+                Please Select Speciality
+            </div>
+        </div>
+        <div class="form-group required ms-0">
+            <label class=" control-label">Title</label>
+            <select class="form-control form-control-sm drop-down-input" style="width: 163px" formControlName="title">
+                <option value="" class="cs-name">Select the Title</option>
+                <option value="Mr.">Mr.</option>
+                <option value="Mrs.">Mrs.</option>
+            </select>
+            <div class="form-error-message" *ngIf="isInvalidWhile('title')">
+                Please Select Title
+            </div>
+        </div>
+    </div>
+    <div class="form-group required ms-0">
+        <label class="control-label">Contact Number</label>
+        <input type="limit" class="form-control form-control-sm" placeholder="Enter the Contact Number"
+            formControlName="contactNumber" style="width: 427px">
+        <div class="form-error-message" *ngIf="isInvalidAfter('contactNumber')">
+            Please Enter a valid Contact Number
+        </div>
+    </div>
+    <div class="form-group ms-0">
+        <label class=" control-label">Email</label>
+        <input type="email" class="form-control form-control-sm" placeholder="Enter the Email" formControlName="email"
+            style="width: 427px">
+        <div class="form-error-message" *ngIf="isInvalidAfter('email')">
+            Please Enter a valid Email
+        </div>
+    </div>
+    <div class="form-group required ms-0">
+        <label class=" control-label">Hospital</label>
+        <input type="limit" formControlName="hospital" class="form-control form-control-sm"
+            placeholder="Enter the Hospital" style="width: 427px">
+        <div class="form-error-message" *ngIf="isInvalidWhile('hospital')">
+            Please Enter Hospital
+        </div>
+    </div>
+    <div class="form-row" style="align-content: center;margin-top: 20px; margin-bottom: 20px;">
+        <div style="display: flex; flex-direction: column;justify-content: center;">
+            <label class="control-label m-0">Profile Picture</label>
+            <div class="file-input-component">
+                <input type="file" id="imageUploader" (change)="onselectFile($event)" class="d-none">
+                <label>{{selectedImageName}}</label>
+                <button type="button" (click)="openFileDialog()">
+                    Select File
+                </button>
+
+            </div>
+        </div>
+        <img [src]="url" alt="profile photo" width="130" height="130" style="border-radius: 3px"
+         onerror ="this.src='https://www.asvinshospitals.com/wp-content/uploads/2019/10/default-placeholder-doctor-half-length-Copy.jpg'">
+    </div>
+</div>

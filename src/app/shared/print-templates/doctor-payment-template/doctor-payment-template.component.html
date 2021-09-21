@@ -1,0 +1,32 @@
+<div class="d-none">
+  <div id="doctor-payment-section">
+    <h2>SOUTHERN LANKA HOSPITALS</h2>
+    <label class="my-2">Doctor Payment</label>
+    <div class="t-row-2">
+      <div class="title">Doctor </div>
+      <div>: {{data.doctorName}}</div>
+    </div>
+    <div class="t-row-2">
+      <div class="title">Session </div>
+      <div>: {{data.sessionStartsAt | date: 'yyyy-MM-dd' }} - {{data.sessionStartsAt | date: 'hh:mm a'}}</div>
+
+    </div>
+    <div class="t-row-2">
+      <div class="title">Confirmed Appointments </div>
+      <div>: {{data.confirmedBookings}}</div>
+    </div>
+    <hr style="border-top: 3px dashed black; border-style: dotted;  color:#fff;
+    background-color:#fff; ">
+    <div class="t-row-2">
+      <div class="row">
+        <div class="col" style="font-weight: bold;">
+          Total Payment
+        </div>
+        <div class="col title" style="font-weight: bold; text-align: right;padding-right: 10px;"> {{ data.totalPayment}}
+        </div>
+      </div>
+    </div>
+    <hr style="border-top: 3px dashed black; border-style: dotted;  color:#fff;
+    background-color:#fff; ">
+  </div>
+</div>

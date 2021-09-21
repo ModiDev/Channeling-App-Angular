@@ -1,0 +1,27 @@
+<div class="session-card-container mt-1 pt-1" [ngClass]="{ 'card-body-selected' : isSelected}">
+    <div class="card-body py-2" (click)="onClick($event)" [ngClass]="{ 'card-body-selected' : isSelected}">
+        <div class="row g-3 mb-2">
+            <p class="col card-text-date p-0 mb-0 ms-2"> {{ ("0" + session.sessionDate.getDate()).slice(-2) }} <span> {{
+                    session.sessionDate.toLocaleString('default', { month: 'short', year: 'numeric' }).toUpperCase() }}
+                </span> </p>
+        </div>
+        <div class="container">
+            <div class="col mb-0">
+                <div class="row ">
+                    <p class="card-text-time my-0"> {{ session.startsAt.toLocaleTimeString([], { hour: '2-digit',
+                        minute:
+                        '2-digit', hour12: true }) }} </p>
+                </div>
+                <div class="row">
+                    <p class="col-7 card-text-time my-0"> {{ session.endsAt.toLocaleTimeString([], { hour: '2-digit',
+                        minute:
+                        '2-digit', hour12: true }) }} </p>
+                    <fa-icon [icon]="faCashRegister" class="fa-sm col-2 my-0 card-text-icon d-flex"></fa-icon>
+                    <p class="col-3 card-text-user my-0 d-flex">
+                        {{ session.currentNumber }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

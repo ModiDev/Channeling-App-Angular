@@ -1,0 +1,11 @@
+<div class="container d-flex justify-content-center">
+    <div class="input-group ">
+        <input type="text" class="form-control mb-0" aria-label="Search" [placeholder]="placeholderText"
+            [ngModel]="inputText" (ngModelChange)="onChangedEmitter($event)">
+        <div class="input-group-append">
+            <button class="btn btn-primary-cl p-0">
+                <fa-icon [icon]=" searchIcon" style="color: #f1f1f1"></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>

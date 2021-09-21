@@ -1,0 +1,79 @@
+<div class="login-page-container bg-white">
+    <div class="container-fluid d-flex flex-column">
+        <div class="row align-items-center justify-content-center  min-vh-100  ">
+            <div class="col-lg-2 d-flex justify-content-center">
+                <img src="assets/images/SLH-Logo-login-page.png " class="img-fluid" alt="" srcset="">
+            </div>
+            <div class="col-lg-4 col-md-6 px-md-5 px-lg-3 m-5">
+                <div class="login-form-container px-5 py-4">
+                    <div class="login-title pt-1">
+                        <h3>Login</h3>
+                    </div>
+                    <div class="login-subtitle">
+                        <h6>Enter Username and Password To Login</h6>
+                    </div>
+                    <div class="py-2">
+                        <div *ngIf="error.length" class="login-error ">
+                            {{ error }}
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                            <fieldset>
+                                <div class="form-group mt-2">
+                                    <label for="login-input-un">User Name</label>
+                                    <input type="text" class="form-control" id="login-input-un" required="required"
+                                           formControlName="username"
+                                           [ngClass]="{'form-input-error' : loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)}">
+                                    <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)"
+                                         class="form-error-message mt-1">
+                                        <div *ngIf="loginForm.get('username')?.errors?.required">
+                                            <p> Username field cannot be empty </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="login-input-pw">Password</label>
+                                    <input type="password" class="form-control" id="login-input-pw" required="required"
+                                           formControlName="password"
+                                           [ngClass]="{'form-input-error' : loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)}">
+                                    <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)"
+                                         class="form-error-message mt-1">
+                                        <div *ngIf="loginForm.get('password')?.errors?.required">
+                                            <p> Password field cannot be empty </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="login-input-pw ">Drawer</label>
+                                    <select  class="form-control drop-down-input" required="required"
+                                           formControlName="drawerId"
+                                           [value]="selectedDrawer?.id"
+                                           [ngClass]="{'form-input-error' : loginForm.get('drawerId')?.invalid && (loginForm.get('drawerId')?.dirty || loginForm.get('drawerId')?.touched)}">
+                                            <option selected value="" disabled slected>Select Drawer</option>    
+                                            <option *ngFor="let drawer of drawers" [ngValue]="drawer.id">{{drawer.name}}</option>    
+                                    </select>
+
+                                    <div *ngIf="loginForm.get('drawerId')?.invalid && (loginForm.get('drawerId')?.dirty || loginForm.get('drawerId')?.touched)"
+                                         class="form-error-message mt-1">
+                                        <div *ngIf="loginForm.get('drawerId')?.errors?.required">
+                                            <p>Please select drawer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group button-container mt-5 mb-3" style="display: flex;justify-content: center;">
+                                    <button *ngIf="!loading" type="submit" [disabled]="!loginForm.valid"
+                                            class="btn btn-block lift text-white login-button col-12">LOGIN
+                                    </button>
+                                    <img *ngIf="loading" src="../../../../assets/images/login-loading.gif" alt="loading" style="height: 40px;"/>
+                                </div>
+                              
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,47 @@
+:root {
+    --background-color: #e5e5e5;
+    --div-background-color: #ffffff;
+
+    --scroll-bar-color: #e9e9e9;
+    --scroll-bar-hover-color: #a7a7a7;
+
+    /*=========== Font Colors ==========*/
+    --text-color-white: #ffffff;
+    --text-color-gray: #7a7a7a;
+    --text-color-light-gray: #9c9c9c;
+    --text-color-black: #2a2a2a;
+    --text-color-purple: #7c6ff9;
+    --text-color-purple-mixed: #4d24a4;
+    --text-color-dark-purple: #2e2f88;
+    --text-color-red: #ff4c6c;
+    --text-color-green: #41dc80;
+    --error-message-text-color-red: #ff4c6c;
+
+    /*=========== Icon Colors ==========*/
+
+    --icon-color-light-gray: #e2e2e2;
+    --icon-color-green: #41dc80;
+    --icon-color-gray: #d9d9d9;
+
+    /*=========== Borsers & Radius  ==========*/
+
+    --div-border-radius: 4px;
+    --div-border-color: #eaeaea;
+    --button-border: 1px solid #eaeaea;
+    --button-border-dark: 1px solid #9c9c9c;
+    /*--------------------------------------------------*/
+
+    /*=========== Button  ==========*/
+    --button-color-gray: #ededed;
+    --button-gradient-green: linear-gradient(93.27deg, #40dcb1 0%, #41dc80 100%);
+    --button-gradient-green-hover: linear-gradient(93.27deg, #4de0b7 0%, #57e48f 100%);
+    --button-gradient-purple: linear-gradient(99.18deg, #a46af5 5.49%, #7c6ff9 100%);
+    --button-gradient-purple-hover: linear-gradient(99.18deg, #b581fd 5.49%, #8b7eff 100%);
+    --button-gradient-pink: linear-gradient(93.27deg, #ff4ca5 0%, #ff4c6c 100%);
+    --button-gradient-pink-hover: linear-gradient(93.27deg, #fc57a9 0%, #fc5977 100%);
+
+    /*=========== Drop Shadows ==========*/
+
+    --button-drop-shadow: 0px 0px 3px 0px #7a7a7a40;
+    --button-drop-shadow-light: 0px 0px 25px 0px #d7d7d747;
+}

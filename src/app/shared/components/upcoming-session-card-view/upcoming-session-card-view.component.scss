@@ -1,0 +1,103 @@
+.card-body {
+  cursor: pointer;
+  background: var(--div-background-color);
+  box-shadow: 0px 0px 2.24491px rgba(122, 122, 122, 0.25);
+  border-radius: 2.99322px;
+  height: 100%;
+  width: 11rem;
+  .postition-row {
+    margin-top: 5px;
+  }
+  .card-text-name {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13.9681px;
+    line-height: 14px;
+    text-transform: capitalize;
+
+    color: #7a7a7a;
+  }
+
+  .card-text-user {
+    height: 16.3px;
+
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13.9681px;
+    line-height: 16px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #7a7a7a;
+  }
+
+  .card-text-position {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 12px;
+    color: var(--text-color-black);
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .card-text-active {
+    height: 16.3px;
+    font-family: "Roboto-Medium", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13.4px;
+    line-height: 16px;
+    /* identical to box height */
+    text-transform: uppercase;
+    color: var(--text-color-gray);
+  }
+  .card-text-time {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: var(--text-color-gray);
+  }
+
+  .card-text-date {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-color-gray);
+    span {
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--text-color-gray);
+    }
+  }
+  .fa-icon-plus {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    /* identical to box height */
+  }
+}
+.card-body-selected {
+  background: var(--button-gradient-purple) !important;
+  color: var(--text-color-white) !important;
+  cursor: pointer;
+  border-radius: 4px;
+  p {
+    color: var(--text-color-white) !important;
+  }
+  span {
+    color: var(--text-color-white) !important;
+  }
+}

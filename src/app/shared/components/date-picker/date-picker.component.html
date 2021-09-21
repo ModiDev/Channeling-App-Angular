@@ -1,0 +1,6 @@
+<div class="form-group required">
+    <label class="cs-name control-label">Date</label>
+    <input type="limit" class="form-control calendar form-control-sm cs-name time_datepicker-fonts"
+           placeholder="yyyy-mm-dd" (click)="d.toggle()"
+           name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"  style="width: 365px">
+</div>

@@ -1,0 +1,193 @@
+/*=========== Button Styles ==========*/
+.btn-reusable {
+  width: 120px;
+  height: 30px;
+  color: var(--div-background-color);
+
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  /* identical to box height */
+
+  text-transform: uppercase;
+  background: var(--button-gradient-green);
+  box-shadow: 0px 0px 25px rgba(215, 215, 215, 0.28);
+  border-radius: 4px;
+}
+
+.btn-blue-add {
+  width: 83px;
+  height: 30px;
+
+  background: var(--button-gradient-purple);
+  border-radius: 3px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 14px;
+  /* identical to box height */
+
+  color: var(--div-background-color);
+}
+
+.btn-close-form {
+  width: 12.8px;
+  height: 13px;
+  background: #ff4c6c;
+}
+
+.btn-back {
+  width: 200px;
+  height: 30px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 15px;
+  text-transform: uppercase;
+
+  color: #9c9c9c;
+
+  background: var(--div-background-color);
+  border: 1px solid #9c9c9c;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 25px rgba(215, 215, 215, 0.28);
+  border-radius: 3px;
+}
+
+.btn-close {
+  width: 12.8px;
+  height: 13px;
+  background: #ff4c6c;
+}
+
+.btn-inactive {
+  width: 240px;
+  height: 30px;
+
+  background: var(--button-gradient-pink);
+  box-shadow: 0px 0px 25px rgba(215, 215, 215, 0.28);
+  border-radius: 3px;
+  font-family: "Roboto" ,sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 15px;
+  text-transform: uppercase;
+
+  color: var(--div-background-color);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  // box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px var(--text-color-purple);
+}
+
+.btn:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+.btn:active {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.308);
+}
+
+/**
+   * Switch Styles
+   */
+
+/* Variables */
+$switch-transition-duration: 0.25s;
+$switch-transition-timing-function: ease;
+
+$switch-label-width: 48px;
+$switch-label-height: 24px;
+
+$switch-rail-width: 100%;
+$switch-rail-height: 100%;
+$switch-rail-background-color: #dedede;
+$switch-rail-border-radius: 9999em;
+
+$switch-knob-width: 11px;
+$switch-knob-height: 11px;
+$switch-knob-border-radius: 50%;
+$switch-knob-background-color: #fff;
+$switch-knob-box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
+$switch-knob-checked-left: 14px;
+
+/* Switch Container */
+.switch {
+  position: relative;
+  // top: 5px;
+  display: inline-block;
+  width: fit-content;
+}
+
+/* Hide the checkbox input (only needed for `:checked` property) */
+.switch-input {
+  display: none;
+}
+
+/* Switch */
+.switch-label {
+  color: transparent;
+  user-select: none;
+
+  /* Switch Rail & Knob */
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  /* Switch Rail */
+  &:before {
+    width: 31px;
+    height: 17px;
+    background-color: var(--button-color-gray);
+    border-radius: $switch-rail-border-radius;
+    transition: background-color $switch-transition-duration $switch-transition-timing-function;
+  }
+
+  /* Switch Knob */
+  &:after {
+    top: 0;
+    left: 0;
+    margin-top: 3px !important;
+    margin-left: 3px;
+    width: $switch-knob-width;
+    height: $switch-knob-height;
+    border-radius: $switch-knob-border-radius;
+    background-color: $switch-knob-background-color;
+    box-shadow: $switch-knob-box-shadow;
+    transition: left $switch-transition-duration $switch-transition-timing-function;
+  }
+}
+
+/* When input is checked */
+.switch-input:checked + .switch-label {
+  /* Switch Rail */
+  &:before {
+    background-color: var(--button-color-gray);
+  }
+
+  /* Switch Knob */
+  &:after {
+    left: $switch-knob-checked-left;
+    background: var(--button-gradient-purple);
+  }
+}
+
+
+.scroll-button:disabled {
+  .btn-icon {
+      color: var(--icon-color-gray) !important;
+  }
+}

@@ -1,0 +1,86 @@
+<div class="d-none" style="font-size: 12px;">
+    <div id="cash-balance-print">
+        <h2>SOUTHERN LANKA HOSPITALS</h2>
+        <label style="font-size: 18px;">Reception - Cash Balance</label>
+
+        <div style="display: flex;justify-content: space-between;font-weight: bold;margin-top: 10px;">
+            <div>
+                <div class="t-row-2">
+                    <div class="title" >Cashier</div>
+                    <div>{{data.userName}}</div>
+                </div>
+                <div class="t-row-2">
+                    <div class="title" >Drawer No</div>
+                    <div>{{data.drawerNo}}</div>
+                </div>
+                <div class="t-row-2">
+                    <div class="title">Confirmed appointments</div>
+                    <div>{{data.ConfirmedAppointments}}</div>
+                </div>
+            </div>
+            <div>
+                <div class="t-row-2">
+                    <div class="title" style="text-align: right; padding-right: 20px;">From</div>
+                    <div>{{data.loginTime | date: 'dd/MM/yyyy hh:mm a'}}</div>
+                </div>
+                <div class="t-row-2">
+                    <div class="title" style="text-align: right; padding-right: 35px;">To</div>
+                    <div>{{data.logoutTime | date: 'dd/MM/yyyy hh:mm a'}}</div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div>
+            <table style="border-collapse: collapse;">
+                <thead style="border-top:1px dashed black;border-bottom:1px dashed black;">
+                    <th>Title</th>
+                    <th style="text-align: right;">Amount(Rs)</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let group of data.debitTransactionSummery.groups">
+                        <td>{{group.name}}</td>
+                        <td style="text-align: right;">{{group.value}}</td>
+                    </tr>
+                    <tr style="border-bottom: dashed 1px black; font-weight: bolder;">
+                        <td>TOTAL CASH RECIEVED</td>
+                        <td style="text-align: right;">{{data.debitTransactionSummery.total}}</td>
+                    </tr>
+                    <tr *ngFor="let group of data.creditTransactionSummery.groups">
+                        <td>{{group.name}}</td>
+                        <td style="text-align: right;">{{group.value}}</td>
+                    </tr>
+
+                    <tr style="border-bottom: dashed 1px black; font-weight: bolder;">
+                        <td>TOTAL CASH PAYMENTS</td>
+                        <td style="text-align: right;">{{data.creditTransactionSummery.total}}</td>
+                    </tr>
+                    <tr>
+                        <td>CASH IN HAND</td>
+                        <td style="text-align: right;">{{data.cashInHand}}</td>
+                    </tr>
+                    <tr>
+                        <td>SYSTEM CASH BALANCE</td>
+                        <td style="text-align: right;">{{data.systemBalance}}</td>
+                    </tr>
+                    <tr>
+                        <td>CASH EXCESS/SHORT</td>
+                        <td style="text-align: right;"> {{data.systemBalance-data.cashInHand}}</td>
+                    </tr>
+                    <tr>
+                        <td>C\F TO NEXT CASHIER</td>
+                        <td style="text-align: right;">-10000</td>
+                    </tr>
+                    <tr style="border-bottom: solid 1px black; font-weight: bolder;">
+                        <td>NET CASH IN HAND</td>
+                        <td style="text-align: right;">{{data.cashInHand-10000}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="model-content-wrapper">
+    <div class="model-title">
+        <h6>{{ modalTitle }}</h6>
+        <button type="button" class="btn btn-close" (click)="activeModal.dismiss('Cross click')">
+            <fa-icon [icon]="faCross" class=" d-flex mb-auto mt-auto " style="color: #f1f1f1 ">
+            </fa-icon>
+        </button>
+    </div>
+    <div>
+        <app-loading></app-loading>
+        <form [formGroup]="addSessionForm" (ngSubmit)="onSubmit()">
+            <div class="">
+                <div class="form-group required ms-0">
+                    <label class="cs-name control-label">Consultant Name</label>
+                    <select class="form-control form-control-sm cs-name drop-down-input"
+                        [ngClass]="{'form-input-error' : addSessionForm.get('doctor')?.invalid && ( addSessionForm.get('doctor')?.touched ||addSessionForm.get('doctor')?.dirty)}"
+                        formControlName="doctor">
+                        <option value="" class="cs-name">Select the Consultant</option>
+                        <option *ngFor="let doctor of doctorList" [ngValue]="doctor.id">{{doctor.name + " - " +
+                            doctor.specialty }}</option>
+                    </select>
+                </div>
+                <div *ngIf="addSessionForm.get('doctor')?.invalid && (addSessionForm.get('doctor')?.dirty || addSessionForm.get('doctor')?.touched)"
+                    class="form-error-message mt-1">
+                    <div *ngIf="addSessionForm.get('doctor')?.errors?.required">
+                        <p> Please Select The Consultant Name </p>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="form-group required ms-0">
+                    <label class="cs-name control-label">Date</label>
+                    <input class="form-control form-control-sm cs-name date-input" type="date" required="required"
+                        formControlName="date"
+                        [ngClass]="{'form-input-error' : addSessionForm.get('date')?.invalid && (addSessionForm.get('date')?.dirty || addSessionForm.get('date')?.touched)}">
+                </div>
+                <div *ngIf="addSessionForm.get('date')?.invalid && (addSessionForm.get('date')?.dirty || addSessionForm.get('date')?.touched)"
+                    class="form-error-message mt-1">
+                    <div *ngIf="addSessionForm.get('date')?.errors?.required">
+                        <p> Date field can't be empty </p>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class=" form-group required ms-0">
+                    <label class="cs-name control-label ">Start Time</label>
+                    <ngx-material-timepicker #picker></ngx-material-timepicker>
+                    <input class="form-control form-control-sm cs-name time-input" required="required"
+                        formControlName="startTime"
+                        [ngClass]="{'form-input-error' : addSessionForm.get('startTime')?.invalid && (addSessionForm.get('startTime')?.dirty || addSessionForm.get('startTime')?.touched)}"
+                        [ngxTimepicker]="picker">
+                    <div class="form-error-message mt-1" *ngIf="addSessionForm.get('startTime')?.errors?.required">
+                        <p> Start Time field can't be empty </p>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class=" form-group ms-0">
+                    <label class="cs-name control-label">End Time</label>
+                    <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                    <input class="form-control form-control-sm cs-name time-input" formControlName="endTime"
+                        [ngClass]="{'form-input-error' : addSessionForm.get('endTime')?.invalid && (addSessionForm.get('endTime')?.dirty || addSessionForm.get('endTime')?.touched)}"
+                        [ngxTimepicker]="picker1">
+                </div>
+            </div>
+            <div class="">
+                <div class="form-group ms-0">
+                    <label class="cs-name control-label ">Patient Limit</label>
+                    <input type="number" class="form-control form-control-sm cs-name" formControlName="patientLimit">
+                </div>
+            </div>
+            <div class="">
+                <div class="form-group ms-0">
+                    <label class="cs-name control-label ">Reserved Numbers(0-5)</label>
+                    <input type="number" class="form-control form-control-sm" formControlName="reservedLimit" min="1"
+                        max="5">
+                </div>
+            </div>
+            <div class="submit-button">
+                <button [disabled]="!addSessionForm.valid" class="btn btn-reusable" type="submit"> {{ submitButtonTitle
+                    }}
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>

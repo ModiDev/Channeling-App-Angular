@@ -1,0 +1,12 @@
+<app-header (toggleSideBarEvent)="showSideBar = !showSideBar"></app-header>
+<div class="container-fluid mt-2">
+    <!-- <button (click)="onClick()"></button> -->
+    <div class="row-flex ">
+        <div class="side-bar-component" *ngIf="showSideBar">
+            <app-side-bar-admin></app-side-bar-admin>
+        </div>
+        <div class="content-container ms-4" [ngStyle]="!showSideBar ? {'max-width': '97vw' } : {}">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

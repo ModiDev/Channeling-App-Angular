@@ -1,0 +1,67 @@
+<div class="nav-bar-div">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand ">
+        <div class="container-fluid ">
+            <div class="navbar-brand">
+                <button class="btn" (click)="toggleSideBar(!toggleButton)">
+                    <fa-icon [icon]="faBars"></fa-icon>
+                </button>
+            </div>
+            <div class="main-title d-none d-lg-block me-auto" routerLink="/dashboard/home">
+                <h3>SOUTHERN LANKA <span>HOSPITALS</span></h3>
+            </div>
+            <div class="navbar-items">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/dashboard/home" routerLinkActive="active">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/dashboard/active" routerLinkActive="active">ACTIVE</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" routerLink="/dashboard/upcoming" routerLinkActive="active">UPCOMING</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/dashboard/history/', doctorId]"
+                            routerLinkActive="active">HISTORY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/dashboard/appointments"
+                            routerLinkActive="active">APPOINTMENTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/admin" routerLinkActive="active">ADMIN</a>
+                    </li>
+                    <li>
+                        <div class="user-details">
+                            <div class="user-avatar">
+                                <fa-icon [icon]="faUser"></fa-icon>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
+                        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button">
+                            {{ (user?.firstName ?? "") + " " + (user?.lastName ?? "")}}
+                        </a>
+                        <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu log-out-div">
+                            <div class="log-out-div-item log-out-div-border d-flex pe-5" ngbDropdownItem
+                                (click)="openPaymentsView()" (click)="$event.preventDefault()">
+                                <div class="icon p-0">
+                                    <fa-icon [icon]="faMoneyBill" class="d-flex "></fa-icon>
+                                </div>
+                                <h6 class="d-flex ms-3"> Payments</h6>
+                            </div>
+                            <div class="log-out-div-item d-flex pe-5" ngbDropdownItem (click)="openLogoutView()">
+                                <div class="icon p-0">
+                                    <fa-icon [icon]="faSignOut" class="d-flex my-0 p-0"></fa-icon>
+                                </div>
+                                <h6 class="d-flex ms-3"> Log Out</h6>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+</div>

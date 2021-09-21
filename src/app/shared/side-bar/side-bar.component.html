@@ -1,0 +1,29 @@
+<div class="side-bar-container overflow-auto">
+    <ngb-accordion [closeOthers]="true" #acc="ngbAccordion">
+        <ngb-panel *ngFor="let specialty of specialities; let i = index;" id="acc-{{i.toString()}}">
+            <ng-template ngbPanelHeader>
+                <div class="d-flex align-items-center">
+                    <button ngbPanelToggle class="btn"
+                        [ngStyle]=" acc.activeIds[0] == 'acc-' + i.toString()  ? {'color': '#4D24A4' } : {}">
+                        {{ specialty.toUpperCase() }}
+                    </button>
+                    <div *ngIf="acc.activeIds[0] !== 'acc-' + i.toString()" class="d-flex toggle-arrow"
+                        (click)="acc.toggle('acc-' + i.toString())">
+                        <fa-icon [icon]="faAngleRight"> </fa-icon>
+                    </div>
+                    <div *ngIf="acc.activeIds[0] === 'acc-' + i.toString()" class="d-flex selected-header toggle-arrow"
+                        (click)="acc.toggle('acc-' + i.toString())">
+                        <fa-icon [icon]="faAngleDown"> </fa-icon>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div *ngFor="let doctor of getDoctorsBySpeciality(specialty)" class="side-bar-doctor-card ms-2"
+                    [routerLink]="[currentRoute, doctor.id]">
+                    <h5 class="doctor-name mb-0">{{ "" + doctor?.title + " " + doctor.name }} </h5>
+                    <h6 class="doctor-contact"> {{ doctor.contact }} </h6>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

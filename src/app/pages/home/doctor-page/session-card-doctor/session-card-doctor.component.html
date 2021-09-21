@@ -1,0 +1,31 @@
+<div class="session-card-container mt-1 pt-1" [ngClass]="{ 'card-body-selected' : isSelected}">
+
+    <div class="card-body py-2" (click)="onClick($event)" [ngClass]="{ 'card-body-selected' : isSelected}">
+        <div class="row g-3 mb-2">
+            <p class="col card-text-date p-0 mb-0 ms-2"> {{ session.sessionDate.getDate() }} <span> {{
+                    session.sessionDate.toLocaleString('default', { month: 'short' }).toUpperCase() }} </span> </p>
+            <div class="col justify-content-end">
+                <p class="card-text-user mt-2 ">
+                    <fa-icon [icon]="fauser" class="fa-sm"></fa-icon>&nbsp; {{ session.currentNumber + 1 }}
+                </p>
+            </div>
+        </div>
+
+        <div class="row mb-0">
+            <div class="col-6">
+                <div class="row ">
+                    <p class="card-text-time my-0"> {{ session.startsAt.toLocaleTimeString([], { hour: '2-digit',
+                        minute:
+                        '2-digit', hour12: true }) }} </p>
+                </div>
+                <div class="row">
+                    <p class="card-text-time my-0"> {{ session.endsAt.toLocaleTimeString([], { hour: '2-digit', minute:
+                        '2-digit', hour12: true }) }} </p>
+                </div>
+            </div>
+            <div class="col-6 px-2">
+                <app-add-booking-button [session]="session"> </app-add-booking-button>
+            </div>
+        </div>
+    </div>
+</div>

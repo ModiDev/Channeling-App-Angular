@@ -1,0 +1,220 @@
+.log-out-wrapper {
+  padding: 21px 35px;
+  .model-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 11px;
+    .titles{
+      .main-title{
+          font-size: 18px;
+          font-weight: 700;
+          color: #7A7A7A;
+          margin: 0;
+          padding-top: 3px;
+        }
+        .sub-title{
+          font-size: 14px;
+          font-weight: 300;
+          color: #7A7A7A;
+          margin: 0;
+          padding-top: 3px;
+          margin-left: 9px;
+        }
+    }
+   
+  }
+  .details {
+    .details-title {
+      font-family: "Roboto";
+      font-size: 12px;
+      font-weight: 300;
+      text-align: left;
+      color: var(--text-color-light-gray);
+    }
+
+    .details-data {
+      font-family: "Roboto";
+      font-size: 14px;
+      font-weight: 300;
+      text-align: left;
+      color: var(--text-color-black);
+    }
+  }
+  .time {
+    text-transform: uppercase;
+  }
+
+  .mytable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .mytable th {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 300;
+    text-align: left;
+    color: var(--text-color-light-gray);
+  }
+  .mytable td,
+  .mytable th {
+    border-bottom: none;
+    padding: 5px;
+  }
+
+  .mytable tr {
+    border-bottom: 1px solid #f7f7f7;
+  }
+  .mytable th {
+    text-align: left;
+    background-color: white;
+    color: #7a7a7a;
+  }
+  .mytable td {
+    font-family: "Roboto";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  .side-details {
+    // height: calc(100vh - 4.125rem);
+    flex-basis: 11.625rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+  .content {
+    flex: 1 1 auto;
+    flex-direction: column;
+    max-width: calc(100vw - 20.1rem);
+    .primary-form-button,
+    .primary-form-button-bg {
+      font-size: 13px;
+      font-family: "Roboto-medium";
+      font-weight: 700;
+      box-shadow: var(--button-drop-shadow-light);
+    }
+
+    .addition-text {
+      font-family: "Roboto";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: var(--text-color-green);
+    }
+
+    .deduction-text {
+      font-family: "Roboto";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: var(--text-color-red);
+    }
+
+    .amount-text {
+      text-align: right !important;
+    }
+
+    .normal-text {
+      font-family: "Roboto";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: var(--text-color-black);
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-color-gray);
+      margin-bottom: 0;
+      padding-top: 0;
+      span {
+        margin-left: 0px;
+        color: var(--error-message-text-color-red);
+      }
+    }
+    .form-label-custom {
+      margin-top: 5px;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-color-gray);
+    }
+
+    .form-select {
+      height: 30px;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-color-black);
+
+      border: 1px solid #eaeaea;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    .form-select:focus {
+      outline: none !important;
+      border-color: lightskyblue;
+      box-shadow: #ffffff;
+    }
+
+    input {
+      height: 30px;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-color-black);
+    }
+
+    .fee-row {
+      p {
+        font-family: "Roboto";
+        font-size: 12px;
+        font-weight: 300;
+        text-align: left;
+        color: var(--text-color-light-gray);
+        margin-bottom: 0 !important;
+      }
+      .fee-row-value {
+        font-family: "Roboto";
+        font-size: 14px;
+        font-weight: 400;
+        text-align: left;
+        color: var(--text-color-gray);
+      }
+    }
+
+    .primary-form-button {
+      background: var(--button-gradient-green);
+    }
+    .primary-form-button:hover {
+      background: var(--button-gradient-green-hover);
+    }
+    .primary-form-button-bg {
+      background: var(--button-gradient-purple);
+    }
+    .primary-form-button-bg:hover {
+      background: var(--button-gradient-purple-hover);
+    }
+
+    .button-row {
+      align-items: baseline;
+      justify-content: baseline;
+    }
+  }
+}

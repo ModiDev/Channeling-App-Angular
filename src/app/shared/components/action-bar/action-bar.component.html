@@ -1,0 +1,12 @@
+<div class="action-bar-wrapper">
+    <div class="title">{{title}}</div>
+    <div class="end-wrapper">
+        <div class="search-input" style="width: 345px;">
+            <input type="text" style="height: 30px;" class="form-control form-control-sm" aria-label="Search" [placeholder]="placeholder"
+                [ngModel]="inputText" (ngModelChange)="onChangeSearchText($event)">
+            <button [disabled]="inputText.length < 3" class="btn btn-search" (click)="searchButtonClick()">
+                <fa-icon [icon]=" searchIcon" style="color: #f1f1f1"></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>

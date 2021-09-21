@@ -1,0 +1,35 @@
+<app-admin-action-bar titleAdmin="DISCOUNT MANAGEMENT" (onSearchTextChange)="onChangeSearchText($event)"
+    (onSearchTypeChange)="onChangeSearchType($event)" (onAction)="onActionClick()" actionButtonText="ADD DISCOUNT"></app-admin-action-bar>
+<div class="container-fluid panel">
+    <div class="row">
+        <div>
+            <table class="mytable">
+                <tr>
+                    <th>Name <fa-icon [icon]="sortIcon" class="fa-xs" style="margin-left: 5px;cursor: pointer;">
+                        </fa-icon>
+                    </th>
+                    <th>Presentage <fa-icon [icon]="sortIcon" class="fa-xs"
+                            style="margin-left: 5px;cursor: pointer;"></fa-icon>
+                    </th>
+                    <th>Reduce From <fa-icon [icon]="sortIcon" class="fa-xs" style="margin-left: 5px;cursor: pointer;">
+                        </fa-icon>
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let discount of discounts | discountFilter:searchText:searchType ">
+                    <td>{{discount.name}}</td>
+                    <td>{{discount.value}}</td>
+                    <td>Reduce from</td>
+
+                    <td [ngClass]="discount.status===status.DE_ACTIVE ? 'table-action-icon inactive' : 'table-action-icon active'">
+                        <fa-icon [icon]="inactiveIcon" class="fa-xs" (click)="updateDrawerState(discount)" ></fa-icon>
+                    </td>
+                    <td class="table-action-icon">
+                        <fa-icon [icon]="faEdit" class="fa-xs" (click)="editDrawer(discount)"></fa-icon>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<app-action-bar title="All Appointments" (onSearchTextChange)="onChangeSearchText($event)"
+  (onSearchTypeChange)="onChangeSearchType($event)" (onAction)="onActionClick()" (onSearchButtonClick)="onSearch()"
+  placeholder="Search by name or phone">
+</app-action-bar>
+<div class="container-fluid panel p-0">
+  <div class="container-fluid panel">
+    <div class="row">
+      <div>
+        <app-appointments-table [searchText]="searchText" [bookings]="bookings"
+          (onSortByChange)="onSortByChange($event)"></app-appointments-table>
+      </div>
+      <div *ngIf="isLoading">
+        <app-loading></app-loading>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid panel p-2"
+  style="display: flex;justify-content: center;align-items: center; color: #40dcb1 ;">
+  <div class="px-4">
+    <fa-icon [icon]="IconHome" class="fa-xs" (click)="!isLoading && onHomeClick()"
+      style="font-weight: bold;font-size: 20px; cursor: pointer" [ngStyle]="{'color':(pageNumber==1)?'#ccc':'#40dcb1'}">
+    </fa-icon>
+  </div>
+  <div class="px-4">
+    <fa-icon [icon]="IconPrevious" class="fa-xs" (click)="!isLoading && onPrevious()"
+      style="font-weight: bold;font-size: 26px; cursor: pointer;"
+      [ngStyle]="{'color':(pageNumber<=1)?'#ccc':'#40dcb1'}"></fa-icon>
+  </div>
+  <div style="font-size: 18px;font-weight: bold;color: black;">
+    {{pageNumber}}
+  </div>
+  <div class="px-4">
+    <fa-icon [icon]="IconNext" class="fa-xs" (click)="!isLoading && onNext()"
+      style="font-weight: bold;font-size: 26px; cursor: pointer;"
+      [ngStyle]="{'color':(bookings.length==0)?'#ccc':'#40dcb1'}"></fa-icon>
+  </div>
+</div>

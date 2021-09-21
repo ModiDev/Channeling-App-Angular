@@ -1,0 +1,41 @@
+<app-admin-action-bar titleAdmin="DRAWER MANAGEMENT" (onSearchTextChange)="onChangeSearchText($event)"
+    (onSearchTypeChange)="onChangeSearchType($event)" (onAction)="onActionClick()" actionButtonText="ADD DRAWER"></app-admin-action-bar>
+<div class="container-fluid panel">
+    <div class="row">
+        <div>
+            <table class="mytable">
+                <tr>
+                    <th>Drawer No <fa-icon [icon]="sortIcon" class="fa-xs" style="margin-left: 5px;cursor: pointer;">
+                        </fa-icon>
+                    </th>
+                    <th>Drawer Description <fa-icon [icon]="sortIcon" class="fa-xs"
+                            style="margin-left: 5px;cursor: pointer;"></fa-icon>
+                    </th>
+                    <th>Pc Name <fa-icon [icon]="sortIcon" class="fa-xs" style="margin-left: 5px;cursor: pointer;">
+                        </fa-icon>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let drawer of drawers | drawerFilter:searchText:searchType">
+                    <td>{{drawer.number}}</td>
+                    <td>{{drawer.description}}</td>
+                    <td>{{drawer.name}}</td>
+
+                    <td [ngClass]="drawer.status===status.DE_ACTIVE ? 'table-action-icon inactive' : 'table-action-icon active'">
+                        <fa-icon style="width: 24px;height: 24px;" *ngIf="!drawer.loading" [icon]="inactiveIcon" class="fa-xs" (click)="updateDrawerState(drawer)" ></fa-icon>
+                        <img style="width: 24px;height: 24px;" *ngIf="drawer.loading" src="../../../../assets/images/loading.gif" alt="loading"/>
+                        <!-- <img   src="../../../../assets/images/loading.gif" alt="loading"/> -->
+                    </td>
+                    <td class="table-action-icon">
+                        <fa-icon [icon]="faEdit" class="fa-xs" (click)="editDrawer(drawer)"></fa-icon>
+                    </td>
+                    <td class="table-action-icon">
+                        <fa-icon [icon]="moreIcon" class="fa-xs" (click)="openDrawerLogs(drawer)"></fa-icon>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

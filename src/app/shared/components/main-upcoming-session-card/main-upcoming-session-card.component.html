@@ -1,0 +1,24 @@
+<div class="main-upcoming-session-card" style="cursor: pointer;" [routerLink]="[doctorRoute, session.doctorId,session.id]">
+    <div class="card-row" style="align-items: center;align-content: center;">
+        <div class="text-01">{{ session.sessionDate.getDate() }} <span> {{
+                session.sessionDate.toLocaleString('default', { month: 'short' }).toUpperCase() }} </span> </div>
+        <div class="text-02 card-row" style="padding-left: 5px;">
+            <div>
+                <fa-icon [icon]="fauser" class="fa-xs"></fa-icon> {{session.bookingCount}}
+            </div>
+            <!-- <div><fa-icon [icon]="fauser" class="fa-xs"></fa-icon> 13</div> -->
+        </div>
+    </div>
+    <div class="card-row" style="margin-top: 12px;">
+        <div class="text-03">
+            <div>{{ session.startsAt.toLocaleTimeString([], { hour: '2-digit',
+                minute:
+                '2-digit', hour12: true }) }}</div>
+            <div>{{ session.endsAt.toLocaleTimeString([], { hour: '2-digit', minute:
+                '2-digit', hour12: true }) }}</div>
+        </div>
+        <div style="width: 50%;padding-top: 5px;padding-bottom: 5px;">
+            <app-add-booking-button class="btn-primary-plus"> </app-add-booking-button>
+        </div>
+    </div>
+</div>

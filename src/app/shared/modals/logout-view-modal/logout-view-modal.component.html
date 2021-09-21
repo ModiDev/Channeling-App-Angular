@@ -1,0 +1,158 @@
+<div class="log-out-wrapper">
+  <app-loading></app-loading>
+  <div class="model-title">
+    <div class="titles"><label class="main-title">LOGOUT</label></div>
+    <button *ngIf="!isConfirmed" type="button" class="btn btn-close" (click)="activeModal.dismiss('Cross click')">
+        <fa-icon [icon]="faCross" class=" d-flex mb-auto mt-auto " style="color: #f1f1f1 ">
+        </fa-icon>
+    </button>
+</div>
+  <div class="content-wrapper">
+    <div class="side-details">
+      <div class="col mt-2 g-0">
+        <div class="details mb-4">
+          <h6 class="details-title"> User Name </h6>
+          <h4 class="details-data"> {{ user.firstName + " " + user.lastName }} </h4>
+        </div>
+        <div class="details mb-4">
+          <h6 class="details-title"> Log in time </h6>
+          <h4 class="details-data"> {{ loginTime | date: 'dd/MM/yyyy hh:mm a' }} </h4>
+        </div>
+        <div class="details mb-4">
+          <h6 class="details-title"> Log out time </h6>
+          <h4 class="details-data"> - </h4>
+        </div>
+        <div class="details mb-4">
+          <h6 class="details-title"> Confirmed appointments </h6>
+          <h4 class="details-data"> {{ConfirmedAppointments}} </h4>
+        </div>
+        <div class="details mb-4">
+          <h6 class="details-title"> Drawer No </h6>
+          <h4 class="details-data"> {{drawerNo}} </h4>
+        </div>
+        <!-- <div class="details mb-4">
+          <h6 class="details-title"> Session ID </h6>
+          <h4 class="details-data"> 004 </h4>
+        </div> -->
+      </div>
+    </div>
+    <div class="content">
+      <table class="mytable" width="100%" style="margin-bottom: 25px;">
+        <col style="width:70%">
+        <col style="width:30%">
+        <tr>
+          <th> Title </th>
+          <th style="text-align: right;"> Amount (Rs) </th>
+        </tr>
+        <tr class="addition-text" *ngFor="let group of creditTransactionSummery.groups">
+          <td>{{group.name}}</td>
+          <td class="amount-text">{{group.value}}</td>
+        </tr>
+        
+        <tr class="normal-text" style=" border-bottom: 1pt solid #41DC80;">
+          <td> Total Cash Recieved</td>
+          <td style="text-align: right;"> <strong> {{creditTransactionSummery.total}} </strong> </td>
+        </tr>
+      </table>
+
+      <table class="mytable mt-3" width="100%" style="margin-bottom: 25px;">
+        <col style="width:70%">
+        <col style="width:30%">
+        <tr class="deduction-text" *ngFor="let group of debitTransactionSummery.groups">
+          <td>{{group.name}}</td>
+          <td class="amount-text">{{group.value}}</td>
+        </tr>
+        <tr class="normal-text" style=" border-bottom: 1px solid #FF4C6C">
+          <td> Total Cash Payments</td>
+          <td style="text-align: right;"> <strong> {{debitTransactionSummery.total}} </strong> </td>
+        </tr>
+      </table>
+
+      <div class="mt-2">
+        <div class="row g-0 mt-1">
+          <div class="col g-0 pe-4 me-4">
+            <div class="form-group">
+              <label for="cash-in-hand" class="form-label">Cash in Hand</label>
+              <input type="number" class="form-control" [(ngModel)]="cashInHand" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="col pe-1">
+            <div class="form-group">
+              <label for="cash-reciever" class="form-label">Net Cash Recever</label>
+              <select id="cash-reciever" class="form-select form-control custom-select" >
+                <option value="acount-devision" selected> Account Devision</option>
+                <option value="finance-devision" selected> Finance Devision</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-3">
+        <div class="row g-0 mt-1">
+          <div class="col fee-row  g-0 pe-1 me-2 ">
+            <p>
+              SYSTEM CASH
+              BALANCE (Rs)
+            </p>
+            <p class="fee-row-value">
+              {{systemBalance}}
+            </p>
+          </div>
+          <div class="col fee-row pe-1 me-2">
+            <p>
+              CASH EXCESS/
+              (SHORT) (Rs)
+            </p>
+            <p class="fee-row-value"  [ngStyle]="{'color': ((systemBalance-cashInHand)<0) ?'#FF4C6C' : ((systemBalance-cashInHand)===0)?'#9c9c9c':'#09853B'}">
+              {{systemBalance-cashInHand}}
+            </p>
+          </div>
+          <div class="col fee-row pe-1">
+            <p>
+              C/F TO NEXT
+              CASHIER (Rs)
+            </p>
+            <p class="fee-row-value">
+              -10000
+            </p>
+          </div>
+          <div class="col fee-row pe-1">
+            <p>
+              NET CASH IN
+              HAND (Rs)
+            </p>
+            <p class="fee-row-value">
+              {{cashInHand-10000}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="button-row">
+        <div class="row g-0">
+          <div class="col form-group button-container mt-4 pe-4">
+            <button type="button" [disabled]="!isConfirmed"
+            (click)="print()"
+              class="btn btn-block lift text-white primary-form-button-bg col-12">
+              PRINT SUMMARY
+            </button>
+          </div>
+          <div class="col form-group button-container mt-4 ps-4">
+            <button type="button" *ngIf="!isConfirmed" (click)="onConfirm()"
+              class="btn btn-block lift text-white primary-form-button col-12">
+              CONFIRM
+            </button>
+            <button type="button" *ngIf="isConfirmed" (click)="close()"
+              class="btn btn-block lift text-white primary-form-button col-12">
+              CANCEL
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="printTamplateData">
+  <app-cash-balance-template [data]="printTamplateData"></app-cash-balance-template>
+</div>

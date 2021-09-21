@@ -1,0 +1,9 @@
+<app-admin-action-bar titleAdmin ="DOCTOR MANAGEMENT" (onSearchTextChange)="onChangeSearchText($event)"
+    (onSearchTypeChange)="onChangeSearchType($event)" (onAction)="onActionClick()" actionButtonText="ADD DOCTOR"></app-admin-action-bar>
+<div class="container-fluid panel">
+    <div class="row">
+        <div *ngFor="let doctor of doctors | doctorFilter:searchText:searchType" class="col-12 col-md-12 col-lg-4 p-2">
+            <app-view-doctor-card [doctor]="doctor" (click)="openDoctorView(doctor)"></app-view-doctor-card>
+        </div>
+    </div>
+</div>

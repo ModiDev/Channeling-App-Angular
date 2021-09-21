@@ -1,0 +1,49 @@
+<div class="container my-custom-scrollbar table-wrapper-scroll-y table-responsive">
+  <table class="mytable">
+    <tr>
+      <th style="padding-left: 24px;" (click)="sortBookings('REF-NO')">Ref. No. <fa-icon
+          *ngIf="currentSort === 'REF-NO'" [icon]="sortIconUp" class="fa-xs"
+          style="margin-left: 5px;font-weight: bold;"></fa-icon>
+        <fa-icon *ngIf="currentSort !== 'REF-NO'" [icon]="sortIcon" class="fa-xs"
+          style="margin-left: 5px;font-weight: bold;"></fa-icon>
+      </th>
+      <th (click)="sortBookings('NAME')">Name <fa-icon *ngIf="currentSort === 'NAME'" [icon]="sortIconUp" class="fa-xs"
+          style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+        <fa-icon *ngIf="currentSort !== 'NAME'" [icon]="sortIcon" class="fa-xs"
+          style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+      </th>
+      <th style="cursor:default;">Contact No</th>
+      <th (click)="sortBookings('DOCTOR')">Doctor <fa-icon *ngIf="currentSort === 'DOCTOR'" [icon]="sortIconUp"
+          class="fa-xs" style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+        <fa-icon *ngIf="currentSort !== 'DOCTOR'" [icon]="sortIcon" class="fa-xs"
+          style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+      </th>
+      <th (click)="sortBookings('SESSION')">Session <fa-icon *ngIf="currentSort === 'SESSION'" [icon]="sortIconUp"
+          class="fa-xs" style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+        <fa-icon *ngIf="currentSort !== 'SESSION'" [icon]="sortIcon" class="fa-xs"
+          style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+      </th>
+      <th (click)="sortBookings('PATIENT-NO')">Patient No. <fa-icon *ngIf="currentSort === 'PATIENT-NO'"
+          [icon]="sortIconUp" class="fa-xs" style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+        <fa-icon *ngIf="currentSort !== 'PATIENT-NO'" [icon]="sortIcon" class="fa-xs"
+          style="margin-left: 5px;font-weight: bold;">
+        </fa-icon>
+      </th>
+    </tr>
+    <tr *ngFor="let booking of bookings ">
+      <td style="padding-left: 24px;">{{booking.referenceNo}}</td>
+      <td>{{booking.patientName}}</td>
+      <td>{{booking.patient?.mobile}}</td>
+      <td>{{booking.doctor?.name}}</td>
+      <td>{{booking.sessionStartsAt | date: 'dd.MM.yyyy h:mm:ss a'}}</td>
+      <td>{{booking.patientNo}}</td>
+    </tr>
+  </table>
+</div>

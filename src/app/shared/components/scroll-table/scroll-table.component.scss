@@ -1,0 +1,100 @@
+.table-wrapper {
+  width: 100%;
+  overflow-y: auto;
+
+  table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table tr:nth-child(even) {
+    background-color: #fbfbfb !important;
+  }
+
+  .btn-reusable-table {
+    height: 17px;
+    color: var(--div-background-color);
+
+    /* identical to box height */
+    text-transform: uppercase;
+    background: var(--button-gradient-green);
+    box-shadow: 0px 0px 25px rgba(215, 215, 215, 0.28);
+    border-radius: 4px;
+  }
+  .btn-fonts {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 11px;
+    line-height: 6px;
+    font-weight: normal;
+  }
+
+  th {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 14px;
+    padding-left: 10px;
+    position: sticky;
+    background: white;
+    cursor: pointer;
+    top: 0; /* Don't forget this, required for the stickiness */
+    /* identical to box height */
+    color: #7a7a7a;
+  }
+  th,
+  td {
+    padding: 0.3rem;
+    border-bottom: none;
+  }
+
+  td,
+  .confirmation-type {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #2a2a2a;
+  }
+
+  .dropdown-toggle::after {
+    margin-left: 5px;
+    color: #e2e2e2;
+  }
+
+  /*=========== table text styles ==========*/
+  .Confirmed {
+    color: #41dc80;
+  }
+  .Tentative {
+    color: #45a4c2;
+  }
+  .Cancelled {
+    color: #f94162;
+  }
+  /*=========== table icon styles ==========*/
+  .green-status {
+    color: #41dc80;
+  }
+  .yellow-status {
+    color: #efef01;
+  }
+  .gray-status {
+    color: #7a7a7a;
+  }
+  .red-status {
+    color: #b45e5e;
+  }
+}
+
+.normal-page {
+  height: calc(100vh - 20rem);
+}
+
+.history-page {
+  height: calc(100vh - 21rem);
+}
